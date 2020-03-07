@@ -6,6 +6,7 @@ import {TransitionSpecs} from '@react-navigation/stack';
 
 import Scanner from './pages/Scanner';
 import Home from './pages/Home';
+import Collect from './pages/Collect'
 
 const Stack = createStackNavigator();
 
@@ -18,7 +19,7 @@ const forFade = ({ current, closing }) => ({
 function Routes() {
     return(
         <Stack.Navigator 
-            initialRouteName="Main"
+            initialRouteName="Home"
             headerMode="screen"
             
             screenOptions={{
@@ -34,8 +35,18 @@ function Routes() {
                         close: TransitionSpecs.TransitionIOSSpec, 
                     },
                     cardStyleInterpolator: forFade
-            }} 
-            />
+            }}/>
+
+            <Stack.Screen name="Collect" component={Collect} 
+                options={{
+                    title:'Collect',
+                    transitionSpec: {
+                        open: TransitionSpecs.TransitionIOSSpec,
+                        close: TransitionSpecs.TransitionIOSSpec, 
+                    },
+                    cardStyleInterpolator: forFade
+            }} />
+            
             <Stack.Screen name="Scanner" component={Scanner} 
                 options={{
                     title:'Scanner',
@@ -44,8 +55,9 @@ function Routes() {
                         close: TransitionSpecs.TransitionIOSSpec, 
                     },
                     cardStyleInterpolator: forFade
-                }} />
+            }} />
 
+            
         </Stack.Navigator>
     );
 }
