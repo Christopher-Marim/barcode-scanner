@@ -1,11 +1,15 @@
 import React from 'react';
+import {NavigationContainer} from '@react-navigation/native';
 import { StyleSheet, Button, Text, View } from 'react-native';
+
+import Routes from './src/routes';
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Button title="Go To Scan"/>
-    </View>
+    <NavigationContainer>
+      <Routes />
+
+    </NavigationContainer>  
   );
 }
 
