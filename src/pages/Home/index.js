@@ -4,8 +4,12 @@ import { StyleSheet, Text, View, Button} from 'react-native';
 export default function Home( {navigation } ) {
   return (
     <View style={styles.container}>
-        <Button style={styles.button} title="Realizar Coleta" onPress={() => navigation.navigate('Scanner')}/>
-    </View>
+        
+    <Button
+      title="Realizar consulta"
+      onPress={() => navigation.navigate('Scanner')}
+    />
+  </View>
   );
 }
 const styles = StyleSheet.create({

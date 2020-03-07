@@ -5,10 +5,12 @@ import { Text, View, Button } from 'react-native';
 
 export default function Collect({ navigation }) {
   return (
-    <View>
-        <Text> Collect</Text>
+    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+        <Text>Inventory</Text>
         <Button title="Realizar Coleta"/>
-    </View>
+        
+      </View>
+    
 
   );
 }

@@ -1,9 +1,7 @@
 import * as React from 'react';
-import {View, Text} from 'react-native';
 
 import { createStackNavigator} from '@react-navigation/stack';
 import {TransitionSpecs} from '@react-navigation/stack';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 
 import Scanner from './pages/Scanner';
@@ -11,7 +9,7 @@ import Home from './pages/Home';
 import Collect from './pages/Collect'
 
 // const Stack = createStackNavigator();
-const Tab = createBottomTabNavigator();
+const Tab = createMaterialTopTabNavigator();
 
 const forFade = ({ current, closing }) => ({
     cardStyle: {
@@ -47,22 +45,9 @@ const forFade = ({ current, closing }) => ({
     );
   }
   
-  const CollectStack = createStackNavigator();
-  
   function CollectStackScreen() {
     return (
-      <CollectStack.Navigator>
-        <Collect.Screen name="Collect" component={Collect} 
-            options={{
-                title:'Collect',
-                transitionSpec: {
-                    open: TransitionSpecs.TransitionIOSSpec,
-                    close: TransitionSpecs.TransitionIOSSpec, 
-                },
-                cardStyleInterpolator: forFade
-        }} />
-        
-      </CollectStack.Navigator>
+        <Collect/>
     );
   }
  
