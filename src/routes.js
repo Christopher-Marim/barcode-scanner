@@ -1,5 +1,6 @@
 import * as React from 'react';
 
+import {Image} from 'react-native';
 import { createStackNavigator} from '@react-navigation/stack';
 import {TransitionSpecs} from '@react-navigation/stack';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
@@ -30,7 +31,7 @@ const forFade = ({ current, closing }) => ({
         tabBarOptions={{
           inactiveTintColor: 'white',
           activeTintColor:'white',
-          style:{backgroundColor:'#337DFF'},
+          style:{backgroundColor:'#0027FF'},
 
          indicatorStyle:{
            borderBottomColor:"grey",
@@ -48,6 +49,13 @@ const forFade = ({ current, closing }) => ({
     );
   }
 
+function LogoTitle(){
+return(<Image
+    style={{width:70, height:70}}
+    source={require('../assets/logo.png')}/>
+);
+  }
+
 function Routes() {
     return(
       <SafeAreaView style={{flex:1, justifyContent:'space-between', alignItens:'center'}}>
@@ -57,17 +65,20 @@ function Routes() {
           options={{
           title:'ETM',
           headerTitleAlign:'center',
+          // headerLeft: props => <LogoTitle {...props} />,
             transitionSpec: {
                 open: TransitionSpecs.TransitionIOSSpec,
                 close: TransitionSpecs.TransitionIOSSpec, 
             },
             cardStyleInterpolator: forFade,
             headerTitleStyle:{
-              fontSize:20, 
+              fontSize:30, 
               paddingBottom:10,
+              fontWeight:'bold',
+              fontFamily:'serif'
             },
             headerStyle:{
-              backgroundColor:'#337DFF'
+              backgroundColor:'#0027FF'
             },
             headerTintColor:'white',
           }
@@ -82,7 +93,7 @@ function Routes() {
           },
           cardStyleInterpolator: forFade,
           headerStyle:{
-            backgroundColor:'#337DFF'  
+            backgroundColor:'#0027FF'  
           },
           headerTintColor:'white',
         }}
