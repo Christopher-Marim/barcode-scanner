@@ -56,12 +56,16 @@ function Routes() {
            <HomeStack.Screen name="Home" component={HomeTabsScreen} 
           options={{
           title:'ETM',
+          headerTitleAlign:'center',
             transitionSpec: {
                 open: TransitionSpecs.TransitionIOSSpec,
                 close: TransitionSpecs.TransitionIOSSpec, 
             },
             cardStyleInterpolator: forFade,
-            
+            headerTitleStyle:{
+              fontSize:20, 
+              paddingBottom:10,
+            },
             headerStyle:{
               backgroundColor:'#337DFF'
             },
@@ -78,7 +82,7 @@ function Routes() {
           },
           cardStyleInterpolator: forFade,
           headerStyle:{
-            backgroundColor:'#337DFF'        
+            backgroundColor:'#337DFF'  
           },
           headerTintColor:'white',
         }}
