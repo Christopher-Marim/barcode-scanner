@@ -15,8 +15,8 @@ export default function Collect({navigation}) {
       [
         ...items,
         {
-          id: items.length.toString,
-          description: 'Banco',
+          id: items.length,
+          description: '',
           codigo: codigo,
           quantidade: '1'
         }
