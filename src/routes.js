@@ -19,7 +19,7 @@ const forFade = ({ current, closing }) => ({
 function Routes() {
     return(
         <Stack.Navigator 
-            initialRouteName="Home"
+            initialRouteName="Collect"
             headerMode="screen"
             
             screenOptions={{
