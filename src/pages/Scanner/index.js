@@ -1,10 +1,29 @@
 import React, { useState, useEffect } from 'react';
 import { Text, View, StyleSheet, Button } from 'react-native';
 import { BarCodeScanner } from 'expo-barcode-scanner';
+import {AsyncStorage} from 'react-native';
+import {_setBarcode} from '../../services/index';
+import { NavigationContainer } from '@react-navigation/native';
 
-export default function App() {
+export default function App({navigation}) {
+
   const [hasPermission, setHasPermission] = useState(null);
   const [scanned, setScanned] = useState(false);
+  const [barcode, setBarcode] = useState(0);
+
+  // useEffect(() => {
+  //     async function save(){
+  //        try{
+  //          await AsyncStorage.setItem('@inventory_item', barcode)
+  //          //alert('Data was saved!');
+  //          console.log('mudou estado do barcode chamando save');
+  //        } catch(e){
+  //          alert('Failed to save data!');
+  //        } 
+  //     }
+      
+  //     save();
+  // }, [barcode])
 
   useEffect(() => {
     (async () => {
@@ -15,7 +34,11 @@ export default function App() {
 
   const handleBarCodeScanned = ({ type, data }) => {
     setScanned(true);
-    alert(`Bar code with type ${type} and data ${data} has been scanned!`);
+    //const bar__code = data;
+    _setBarcode(data);
+   
+    navigation.navigate('Collect');
+    console.log(`Bar code with type ${type} and data ${data} has been scanned!`);
   };
 
   if (hasPermission === null) {
