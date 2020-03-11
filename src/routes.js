@@ -1,11 +1,9 @@
 import * as React from 'react';
 
 import {Image} from 'react-native';
-import { createStackNavigator} from '@react-navigation/stack';
-import {TransitionSpecs} from '@react-navigation/stack';
+import { createStackNavigator, TransitionSpecs} from '@react-navigation/stack';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import {  SafeAreaView } from 'react-native-safe-area-context';
-
 
 import Scanner from './pages/Scanner';
 import Home from './pages/Home';
