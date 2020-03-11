@@ -7,23 +7,18 @@ import { _barCode } from '../../services/index'
 
 export default function Collect({navigation}) {
   //const {barcode} = route.params;
-  const code = 0;
-  const [ items, setiTems ] = useState([{
-    id: '1',
-    description: "Cadeira",
-    codigo: '8333',
-    quantidade: '1'
-  }]);
+  const [code, setCode] = useState(0);
+  const [ items, setiTems ] = useState([]);
 
   function addItemToList(codigo){
     setiTems(
       [
         ...items,
         {
-          id: '1',
+          id: items.length.toString,
           description: 'Banco',
           codigo: codigo,
-          quantidade: '3'
+          quantidade: '1'
         }
       ]
     )
@@ -31,24 +26,42 @@ export default function Collect({navigation}) {
 
   useFocusEffect(
     useCallback(() => {
-      console.log(`O barcode mudou para ${_barCode}`)
-      addItemToList(_barCode)
+      console.log(`O barcode é ${_barCode}`);
+      console.log(`O code é ${code}`);
+      
+      if(code !== _barCode && _barCode != 0){
+        console.log(`code é diferente`)
+        addItemToList(_barCode);
+        setCode(_barCode);
+      }
+     
     },[_barCode])
   );
 
-  return (
-    <>
-      <FlatList
-        style={{ marginTop: 10}}
-        contentContainerStyle={styles.list}
-        data={items}
-        renderItem={({item}) => <Item description={item.description} codigo={item.codigo} quantidade={item.quantidade}/>}
-        key={items.length}
-        />
+  if (items.length > 0){
+    console.log(items)
+    return (
+      <>
+        <FlatList
+          style={{ marginTop: 10}}
+          contentContainerStyle={styles.list}
+          data={items}
+          renderItem={({item}) => <Item description={item.description} codigo={item.codigo} quantidade={item.quantidade}/>}
+          keyExtractor={(item) => item.codigo}
+          />
+          <Button style={styles.button} title = "Realizar Coleta" onPress={() => navigation.navigate('Scanner')}/>
+          <Button title= "AddtoList" onPress={() => addItemToList(321321)} />
+     </>
+    );
+  }else{
+    return (
+      <>
       <Button style={styles.button} title = "Realizar Coleta" onPress={() => navigation.navigate('Scanner')}/>
       <Button title= "AddtoList" onPress={() => addItemToList(321321)} />
-   </>
-  );
+      </>
+    );
+  }
+ 
 }
 const styles = StyleSheet.create({
   button: {
