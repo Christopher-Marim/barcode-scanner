@@ -1,16 +1,20 @@
-import React, {useState, useEffect, useCallback} from 'react';
-import { Text, View, Button, FlatList, StyleSheet } from 'react-native';
+import React from 'react';
+import { Text, View, StyleSheet } from 'react-native';
 import { Icon, Input } from 'react-native-elements'
-import {useFocusEffect} from '@react-navigation/native'
-import {AsyncStorage} from 'react-native';
-import {_barCode} from '../../services/index'
-// import { Container } from './styles';
-
-retrieveData = async () => {
-  
-}
+import {useDispatch, useSelector} from 'react-redux';
 
 export default function Item({description, codigo, quantidade}) {
+
+  const dispatch = useDispatch();
+  const items = useSelector(state => state.items);
+
+  function increaseQty(code){
+    let newList = teste;
+    const valor = newList.find(x => x.codigo === '64654').quantidade++;
+    console.log(newList);
+    
+  // dispatch({type: 'INCREASE_QUANTITY', item: items})  
+  }
 
   return(
     <View style={styles.listItem}>
@@ -25,13 +29,11 @@ export default function Item({description, codigo, quantidade}) {
       
       <View style ={styles.quantity}>
         <View style={ {flexDirection:'row', alignItems:'center'}}>
-          <Icon name='remove-circle'color='red' onPress={()=>addItems(5)}/>
+          <Icon name='remove-circle'color='red' onPress={()=> increaseQty(323232)}/>
             <Input style={{
               alignItems: 'center',
               paddingHorizontal: 2}}
-              
               placeholder={quantidade}
-              
               />
           <Icon name='add-circle' color='green'/> 
         </View>
