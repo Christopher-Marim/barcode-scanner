@@ -2,41 +2,24 @@ import React, {useState, useCallback} from 'react';
 import { View, Button, StyleSheet, FlatList} from 'react-native';
 import Item from '../../components/ItemList'
 import { useFocusEffect } from '@react-navigation/native';
+import { useSelector, useDispatch } from 'react-redux';
 import { _barCode } from '../../services/index'
 // import { Container } from './styles';
 
 export default function Collect({navigation}) {
-  //const {barcode} = route.params;
+  const items = useSelector(state => state.items);
+  const dispatch = useDispatch();
   const [code, setCode] = useState(0);
-  const [ items, setiTems ] = useState([]);
 
-  function addItemToList(codigo){
-    setiTems(
-      [
-        ...items,
-        {
-          id: items.length,
-          description: '',
-          codigo: codigo,
-          quantidade: '1'
-        }
-      ]
-    )
+  const newItem = {
+      description: 'Description',
+      codigo: '654321',
+      quantidade: '10'
   }
 
-  useFocusEffect(
-    useCallback(() => {
-      console.log(`O barcode é ${_barCode}`);
-      console.log(`O code é ${code}`);
-      
-      if(code !== _barCode && _barCode != 0){
-        console.log(`code é diferente`)
-        addItemToList(_barCode);
-        setCode(_barCode);
-      }
-     
-    },[_barCode])
-  );
+  function addItemToList(codigo){
+    dispatch({type: 'ADD_BARCODE', item: newItem})
+  }
 
   if (items.length > 0){
     console.log(items)
@@ -50,14 +33,14 @@ export default function Collect({navigation}) {
           keyExtractor={(item) => item.codigo}
           />
           <Button style={styles.button} title = "Realizar Coleta" onPress={() => navigation.navigate('Scanner')}/>
-          <Button title= "AddtoList" onPress={() => addItemToList(321321)} />
+          <Button title= "AddtoList" onPress={() => addItemToList()} />
      </>
     );
   }else{
     return (
       <>
       <Button style={styles.button} title = "Realizar Coleta" onPress={() => navigation.navigate('Scanner')}/>
-      <Button title= "AddtoList" onPress={() => addItemToList(321321)} />
+      <Button title= "AddtoList" onPress={() => addItemToList()} />
       </>
     );
   }
