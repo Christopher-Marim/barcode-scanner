@@ -4,6 +4,7 @@ import {Image} from 'react-native';
 import { createStackNavigator, TransitionSpecs} from '@react-navigation/stack';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import {  SafeAreaView } from 'react-native-safe-area-context';
+import { Container, Header, Title, Button, Left, Right, Body, Icon, Text, Content, Col, View } from 'native-base';
 
 import Scanner from './pages/Scanner';
 import Home from './pages/Home';
@@ -47,6 +48,8 @@ const forFade = ({ current, closing }) => ({
     );
   }
 
+  
+
 function LogoTitle(){
 return(<Image
     style={{width:70, height:70}}
@@ -59,7 +62,8 @@ function Routes() {
       <SafeAreaView style={{flex:1, justifyContent:'space-between', alignItens:'center'}}>
         
         <HomeStack.Navigator>
-           <HomeStack.Screen name="Home" component={HomeTabsScreen} 
+           <HomeStack.Screen 
+           name="Home" component={HomeTabsScreen} 
           options={{
           title:'ETM',
           headerTitleAlign:'center',
@@ -68,6 +72,21 @@ function Routes() {
                 open: TransitionSpecs.TransitionIOSSpec,
                 close: TransitionSpecs.TransitionIOSSpec, 
             },
+            headerRight: () => (
+              <Header style={{backgroundColor:'#0027FF', shadowColor:'transparent', elevation:0}} >
+              <Button transparent
+              
+                onPress={() => alert('This is a button!')}
+                title="..."
+                color="#0027FF"><Icon name={"ios-paper-plane"} style={{fontSize:30, color: 'white',backgroundColor:'#0027FF'}}/></Button>
+                <Button transparent
+              
+                onPress={() => alert('This is a COCO!')}
+                title="..."
+                color="#0027FF"><Icon name={"md-more"} style={{fontSize:30, color: 'white',backgroundColor:'#0027FF'}}/></Button>
+                
+                </Header>
+            ),
             cardStyleInterpolator: forFade,
             headerTitleStyle:{
               fontSize:30, 
@@ -82,6 +101,7 @@ function Routes() {
           }
     
     }/>
+
     <HomeStack.Screen name="Scanner" component={Scanner} 
         options={{
           title:'Scanner',
