@@ -4,7 +4,7 @@ import {Image} from 'react-native';
 import { createStackNavigator, TransitionSpecs} from '@react-navigation/stack';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import {  SafeAreaView } from 'react-native-safe-area-context';
-import { Container, Header, Title, Button, Left, Right, Body, Icon, Text, Content, Col, View } from 'native-base';
+import { Container, Header, Title, Button, Left, Right, Form, Icon, Text, Content, Picker, View } from 'native-base';
 
 import Scanner from './pages/Scanner';
 import Home from './pages/Home';
@@ -14,6 +14,7 @@ const HomeStack = createStackNavigator();
 
 
 const forFade = ({ current, closing }) => ({
+  
     cardStyle: {
       opacity: current.progress,
     },
@@ -56,12 +57,17 @@ return(<Image
     source={require('../assets/logo.png')}/>
 );
   }
+  
 
 function Routes() {
+ 
     return(
+      
       <SafeAreaView style={{flex:1, justifyContent:'space-between', alignItens:'center'}}>
         
         <HomeStack.Navigator>
+
+          
            <HomeStack.Screen 
            name="Home" component={HomeTabsScreen} 
           options={{

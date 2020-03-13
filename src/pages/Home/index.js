@@ -1,11 +1,10 @@
 import React from 'react';
 import { StyleSheet, View} from 'react-native';
-import { Container, Header, Title, Button, Left, Right, Body, Icon, Text } from 'native-base';
+import {  Button, Text } from 'native-base';
 
 
 export default function Home( {navigation } ) {
   return (
-    
     <View style={styles.container}>
         
     <Button rounded
@@ -14,9 +13,6 @@ export default function Home( {navigation } ) {
       onPress={() => navigation.navigate('Scanner')}
     ><Text>Realizar consulta</Text></Button>
   </View>
-  
-  
-
   );
 }
 const styles = StyleSheet.create({
