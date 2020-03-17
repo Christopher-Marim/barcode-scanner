@@ -72,21 +72,6 @@ function Routes() {
               open: TransitionSpecs.TransitionIOSSpec,
               close: TransitionSpecs.TransitionIOSSpec,
             },
-            headerRight: () => (
-              <Header style={{backgroundColor:'#0027FF', shadowColor:'transparent', elevation:0}} >
-              <Button transparent
-              
-                onPress={() => alert('This is a button!')}
-                title="..."
-                color="#0027FF"><Icon name={"ios-paper-plane"} style={{fontSize:30, color: 'white',backgroundColor:'#0027FF'}}/></Button>
-                <Button transparent
-              
-                onPress={() => alert('This is a COCO!')}
-                title="..."
-                color="#0027FF"><Icon name={"md-more"} style={{fontSize:30, color: 'white',backgroundColor:'#0027FF'}}/></Button>
-                
-                </Header>
-            ),
             cardStyleInterpolator: forFade,
             headerTitleStyle: {
               fontSize: 20,
