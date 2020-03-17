@@ -1,14 +1,17 @@
 import React from 'react';
-import { StyleSheet, View, Button} from 'react-native';
+import { StyleSheet, View} from 'react-native';
+import {  Button, Text } from 'native-base';
+
 
 export default function Home( {navigation } ) {
   return (
     <View style={styles.container}>
         
-    <Button
+    <Button rounded
+    style={styles.button}
       title="Realizar consulta"
       onPress={() => navigation.navigate('Scanner')}
-    />
+    ><Text>Realizar consulta</Text></Button>
   </View>
   );
 }
@@ -21,7 +24,7 @@ const styles = StyleSheet.create({
     },
 
     button: {
-        backgroundColor: 'red',
+      backgroundColor: '#0027FF',
     }
   });
   

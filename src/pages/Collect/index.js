@@ -65,10 +65,10 @@ export default function Collect({ navigation }) {
 }
 const styles = StyleSheet.create({
   button: {
-    backgroundColor: 'blue',
+    backgroundColor: '#0027FF',
     borderColor: 'white',
     borderWidth: 1,
-    borderRadius: 12,
+    borderRadius: 10,
     color: 'white',
     fontSize: 24,
     fontWeight: 'bold',
