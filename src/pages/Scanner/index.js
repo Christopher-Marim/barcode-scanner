@@ -1,19 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import { Text, View, StyleSheet, Button } from 'react-native';
 import { BarCodeScanner } from 'expo-barcode-scanner';
-import {AsyncStorage} from 'react-native';
-import {useDispatch} from 'react-redux'
+import { AsyncStorage } from 'react-native';
+import { useDispatch } from 'react-redux';
 
-export default function App({navigation}) {
+export default function App({ navigation }) {
   const dispatch = useDispatch();
   const [hasPermission, setHasPermission] = useState(null);
   const [scanned, setScanned] = useState(false);
- 
+
   const newItem = {
     description: '',
-    codigo: '',
-    quantidade: '1'
-  }
+    code: '',
+    qty: 1,
+  };
 
   useEffect(() => {
     (async () => {
@@ -24,9 +24,11 @@ export default function App({navigation}) {
 
   const handleBarCodeScanned = ({ type, data }) => {
     setScanned(true);
-    newItem.codigo = data;
+    console.log('scanned', data);
 
-   dispatch({type: 'ADD_BARCODE', item: newItem});
+    newItem.code = data;
+
+    dispatch({ type: 'ADD_BARCODE', item: newItem });
 
     navigation.navigate('Collect');
   };
@@ -44,13 +46,16 @@ export default function App({navigation}) {
         flex: 1,
         flexDirection: 'column',
         justifyContent: 'flex-end',
-      }}>
+      }}
+    >
       <BarCodeScanner
         onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
         style={StyleSheet.absoluteFillObject}
       />
 
-      {scanned && <Button title={'Tap to Scan Again'} onPress={() => setScanned(false)} />}
+      {scanned && (
+        <Button title={'Tap to Scan Again'} onPress={() => setScanned(false)} />
+      )}
     </View>
   );
 }
