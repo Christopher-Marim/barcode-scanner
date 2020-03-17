@@ -1,8 +1,8 @@
 import React from 'react';
-import {NavigationContainer} from '@react-navigation/native';
-import {   SafeAreaProvider } from 'react-native-safe-area-context';
+import { NavigationContainer } from '@react-navigation/native';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { Provider } from 'react-redux';
-import store from './src/store'
+import store from './src/store';
 
 import Routes from './src/routes';
 
@@ -12,7 +12,7 @@ export default function App() {
       <Provider store={store}>
         <NavigationContainer>
           <Routes />
-        </NavigationContainer>  
+        </NavigationContainer>
       </Provider>
     </SafeAreaProvider>
   );

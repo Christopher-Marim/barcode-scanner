@@ -1,74 +1,91 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Text, View, StyleSheet } from 'react-native';
-import { Icon, Input } from 'react-native-elements'
-import {useDispatch, useSelector} from 'react-redux';
+import { Icon } from 'react-native-elements';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  ItemContainer,
+  InputDescription,
+  InputQuantity,
+  DescriptionView,
+  AddButton,
+  RemoveButton,
+  QuantityView,
+  TextCode,
+  TrashButton,
+} from './styles';
 
-export default function Item({description, codigo, quantidade}) {
-
+export default function Item({ description, codigo, quantidade }) {
   const dispatch = useDispatch();
+  const [inputQty, setInputQty] = useState(quantidade);
+  const [inDescription, setInDescription] = useState('');
   const items = useSelector(state => state.items);
+  // var strQty = ;
+  useEffect(() => {
+    // Atualiza o titulo do documento usando a API do browser
+    setInputQty(quantidade);
+  }, [quantidade]);
 
-  function increaseQty(code){
-    let newList = teste;
-    const valor = newList.find(x => x.codigo === '64654').quantidade++;
-    console.log(newList);
-    
-  // dispatch({type: 'INCREASE_QUANTITY', item: items})  
+  function increaseQty(code) {
+    setInputQty(inputQty + 1);
+    dispatch({ type: 'INCREASE_QUANTITY', item: code });
   }
 
-  return(
-    <View style={styles.listItem}>
-      <View style={{flex:1, paddingRight: 210}}>
-        <Text style ={styles.title}>
-          {description}
-        </Text>
-        <Text>
-          {codigo}
-        </Text>
-      </View>
-      
-      <View style ={styles.quantity}>
-        <View style={ {flexDirection:'row', alignItems:'center'}}>
-          <Icon name='remove-circle'color='red' onPress={()=> increaseQty(323232)}/>
-            <Input style={{
-              alignItems: 'center',
-              paddingHorizontal: 2}}
-              placeholder={quantidade}
-              />
-          <Icon name='add-circle' color='green'/> 
+  function decreaseQty(code) {
+    setInputQty(inputQty - 1);
+    dispatch({ type: 'DECREASE_QUANTITY', item: code });
+  }
+
+  function removeItem(code) {
+    setInputQty(inputQty - 1);
+    dispatch({ type: 'REMOVE_ITEM', item: code });
+  }
+
+  function handleSetQty() {
+    dispatch({ type: 'SET_QUANTITY', item: [codigo, inputQty] });
+  }
+
+  function handleSetDescription() {
+    dispatch({ type: 'SET_DESCRIPTION', item: [codigo, inDescription] });
+  }
+
+  return (
+    <ItemContainer>
+      <DescriptionView>
+        <InputDescription
+          autoCorrect={false}
+          placeholder="Adicionar Descrição"
+          value={inDescription}
+          onChangeText={text => setInDescription(text)}
+          onBlur={handleSetDescription}
+        />
+        <TextCode>{codigo}</TextCode>
+      </DescriptionView>
+
+      <QuantityView>
+        <View>
+          <RemoveButton onPress={() => decreaseQty(codigo)}>
+            <Icon name="remove" color="white" />
+          </RemoveButton>
         </View>
-      </View>
-    </View>
-  )  
+
+        <InputQuantity
+          editable={true}
+          onChangeText={text => setInputQty(text)}
+          onBlur={handleSetQty}
+          value={inputQty.toString()}
+          keyboardType={'numeric'}
+        />
+        <View style={{ paddingRight: 230 }}>
+          <AddButton onPress={() => increaseQty(codigo)}>
+            <Icon name="add" color="white" />
+          </AddButton>
+        </View>
+        <View style={{ alignItems: 'flex-end' }}>
+          <TrashButton onPress={() => removeItem(codigo)}>
+            <Icon name="delete" color="white" />
+          </TrashButton>
+        </View>
+      </QuantityView>
+    </ItemContainer>
+  );
 }
-
-const styles = StyleSheet.create({
-  list: {
-    paddingHorizontal: 20,
-  },
-
-  listItem:{
-    flex: 1,
-    flexDirection: 'row',
-    backgroundColor: '#EEE',
-    marginTop: 10,
-    padding: 5,
-  },
-  title:{
-    fontSize: 20,
-    color: 'black',
-    justifyContent: 'flex-start'
-  },
-  quantity:{
-    flex: 1,
-    paddingTop: 2,
-    paddingLeft: 8,
-    justifyContent: 'flex-start',
-    alignItems: 'flex-end', 
-    
-  },
-  code: {
-    fontSize: 10
-  }
-});
-
