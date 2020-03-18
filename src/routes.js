@@ -1,13 +1,17 @@
 import * as React from 'react';
 
-import { Image } from 'react-native';
+import { Image,View} from 'react-native';
+import { Icon, Button } from 'react-native-elements';
+
 import { createStackNavigator, TransitionSpecs } from '@react-navigation/stack';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { MenuContext } from 'react-native-popup-menu'
 
 import Scanner from './pages/Scanner';
 import Home from './pages/Home';
 import Collect from './pages/Collect';
+import  HeaderButtonSend from './components/HeaderButtonSend';
 
 const HomeStack = createStackNavigator();
 
@@ -40,8 +44,8 @@ function HomeTabsScreen() {
         },
       }}
     >
-      <HomeTabs.Screen name="Princial" component={Home} />
-      <HomeTabs.Screen name="Coleta" component={Collect} />
+      <HomeTabs.Screen name="Home" component={Home} />
+      <HomeTabs.Screen name="Collect" component={Collect} />
     </HomeTabs.Navigator>
   );
 }
@@ -60,11 +64,15 @@ function Routes() {
     <SafeAreaView
       style={{ flex: 1, justifyContent: 'space-between', alignItens: 'center' }}
     >
+      <MenuContext placement="bottom">
       <HomeStack.Navigator>
         <HomeStack.Screen
           name="Home"
           component={HomeTabsScreen}
           options={{
+            headerRight: () => (
+             <HeaderButtonSend/>
+            ),
             title: 'ETM',
             headerTitleAlign: 'center',
             // headerLeft: props => <LogoTitle {...props} />,
@@ -80,7 +88,7 @@ function Routes() {
               fontFamily: 'serif',
             },
             headerStyle: {
-              height: 25,
+              height:60,
               backgroundColor: '#0027FF',
             },
             headerTintColor: 'white',
@@ -103,6 +111,8 @@ function Routes() {
           }}
         />
       </HomeStack.Navigator>
+      </MenuContext>
+
     </SafeAreaView>
   );
 }
