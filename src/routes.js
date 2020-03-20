@@ -11,7 +11,9 @@ import { MenuContext } from 'react-native-popup-menu'
 import Scanner from './pages/Scanner';
 import Home from './pages/Home';
 import Collect from './pages/Collect';
+import MySettings from './pages/MySettings';
 import  HeaderButtonSend from './components/HeaderButtonSend';
+import Login from './pages/Login';
 
 const HomeStack = createStackNavigator();
 
@@ -65,7 +67,27 @@ function Routes() {
       style={{ flex: 1, justifyContent: 'space-between', alignItens: 'center' }}
     >
       <MenuContext placement="bottom">
-      <HomeStack.Navigator>
+      <HomeStack.Navigator
+      initialRouteName="Login"
+      >
+      <HomeStack.Screen
+          name="Login"
+          component={Login}
+          options={{
+            title: '',
+            transitionSpec: {
+              open: TransitionSpecs.TransitionIOSSpec,
+              close: TransitionSpecs.TransitionIOSSpec,
+            },
+            cardStyleInterpolator: forFade,
+            headerStyle: {
+              height:0,
+              backgroundColor: '#0027FF',
+            },
+            headerTintColor: 'white',
+            
+          }}
+        />
         <HomeStack.Screen
           name="Home"
           component={HomeTabsScreen}
@@ -92,6 +114,9 @@ function Routes() {
               backgroundColor: '#0027FF',
             },
             headerTintColor: 'white',
+            gestureEnabled:false,
+            headerLeft:null
+            
           }}
         />
         <HomeStack.Screen
@@ -99,6 +124,22 @@ function Routes() {
           component={Scanner}
           options={{
             title: 'Scanner',
+            transitionSpec: {
+              open: TransitionSpecs.TransitionIOSSpec,
+              close: TransitionSpecs.TransitionIOSSpec,
+            },
+            cardStyleInterpolator: forFade,
+            headerStyle: {
+              backgroundColor: '#0027FF',
+            },
+            headerTintColor: 'white',
+          }}
+        />
+         <HomeStack.Screen
+          name="MySettings"
+          component={MySettings}
+          options={{
+            title: 'MySettings',
             transitionSpec: {
               open: TransitionSpecs.TransitionIOSSpec,
               close: TransitionSpecs.TransitionIOSSpec,

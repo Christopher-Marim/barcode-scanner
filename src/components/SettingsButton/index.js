@@ -12,29 +12,8 @@ import {
 
 export default function SettingsButton() {
   return (
-    <View>
-        <MenuContext>
-    <View>
-      <Menu>
-        <MenuTrigger>
-          <Icon name="more-vert" color="white"/>
-          </MenuTrigger> 
-
-        <MenuOptions>
-          <MenuOption onSelect={() => alert(`Save`)} text="Save" />
-          <MenuOption onSelect={() => alert(`Delete`)}>
-            <Text style={{ color: 'red' }}>Delete</Text>
-          </MenuOption>
-          <MenuOption
-            onSelect={() => alert(`Not called`)}
-            disabled={true}
-            text="Disabled"
-          />
-        </MenuOptions>
-      </Menu>
-    </View>
-</MenuContext>
-    </View>
-    
+    <View/>
+       
+   
   );
 }

@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, ToastAndroid} from 'react-native';
+import { View, Text, ToastAndroid, Alert} from 'react-native';
 
 import { Icon,Button } from 'react-native-elements';
 import { RectButton } from 'react-native-gesture-handler';
@@ -13,6 +13,9 @@ import {
 } from 'react-native-popup-menu';
 import api from '../../services/api';
 import { useSelector } from 'react-redux';
+import MySettings from '../../pages/MySettings';
+
+
 
 
 
@@ -21,7 +24,20 @@ import { useSelector } from 'react-redux';
 
 
 
-export default function HeaderButtonSend() {
+export default function HeaderButtonSend({navigation}) {
+twoOptionAlertHandler = () =>{
+  Alert.alert(
+    'Enviar ao servidor',
+    'Tudo certo para enviar ao servidor?',
+    [
+      {text:'Sim', onPress:() => pushToServer() },
+      {text:'Não', onPress:() => console.log('Ação cancelada'),style:'cancel',},
+    ],
+    {cancelable:false}
+  );
+};
+
+
   const items = useSelector(state => state.items);
 
   async function pushToServer() {
@@ -37,30 +53,25 @@ export default function HeaderButtonSend() {
   }
   return (
  
-      <View style={{flexDirection: "row"}}>
-      <Button type="clear" icon={<Icon name="send" color="white"/>} onPress={() => pushToServer()}/>
+      <View style={{flexDirection: "row",alignItems:'baseline',height:50,}}>
+        
+
+        
+      <Button type="clear" icon={<Icon name="send" color="white" />} onPress={twoOptionAlertHandler}
       
-      <View>
+      />
+      
+      
+      <View style={{paddingLeft:20, paddingRight:7}} >
       <Menu>
-        <MenuTrigger>
-          <Icon name="more-vert" color="white"/>
-
+        <MenuTrigger >
+          <Icon name="more-vert" color="white" />
           </MenuTrigger>
-
-        <MenuOptions>
+       <MenuOptions  >
           <MenuOption
-            onSelect={() => alert(`Not called`)}
-            disabled={true}
-            text="Disabled"
-          />
-           <MenuOption onSelect={() => alert(`Save`)} text="Save" />
-          <MenuOption onSelect={() => alert(`Delete`)}>
-            <Text style={{ color: 'red' }}>Delete</Text>
-          </MenuOption>
-          <MenuOption
-            onSelect={() => alert(`Not called`)}
-            disabled={true}
-            text="Disabled"
+            
+           
+            text="Configurações"
           />
         </MenuOptions>
       </Menu>

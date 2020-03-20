@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import { View, Button, StyleSheet, FlatList } from 'react-native';
+import { View, StyleSheet, FlatList,Button } from 'react-native';
 import Item from '../../components/ItemList';
 import { useFocusEffect } from '@react-navigation/native';
 import { useSelector, useDispatch } from 'react-redux';
 import { Container } from './styles';
+
 
 // import { Container } from './styles';
 
@@ -21,9 +22,6 @@ export default function Collect({ navigation }) {
   function addItemToList(codigo) {
     dispatch({ type: 'ADD_BARCODE', item: newItem });
   }
-    
-       
-
 
    
   if (items.length > 0) {
@@ -43,8 +41,8 @@ export default function Collect({ navigation }) {
           )}
           keyExtractor={item => item.code}
         />
-        <Button
-          style={styles.button}
+        <Button 
+          style={{backgroundColor:"black"}}
           title="Realizar Coleta"
           onPress={() => navigation.navigate('Scanner')}
         />
