@@ -2,14 +2,14 @@ import React from 'react';
 import { StyleSheet, View, Button, Text} from 'react-native';
 import {Icon} from 'react-native-elements';
 
-export default function Home({ navigation }) {
+export default function MySettings({navigation}) {
   return (
      
     <View style={styles.container}>
       <Button
         style={styles.button}
         title="Realizar consulta"
-        onPress={() => navigation.navigate('Scanner')}
+        onPress={() => navigation.navigate('')}
       >
         <Text>Realizar consuuulta</Text>
       </Button>

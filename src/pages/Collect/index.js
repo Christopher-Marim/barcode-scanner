@@ -1,20 +1,18 @@
 import React, { useState } from 'react';
-import { View, Button, StyleSheet, FlatList } from 'react-native';
+import { View, StyleSheet, FlatList,Button } from 'react-native';
 import Item from '../../components/ItemList';
 import { useFocusEffect } from '@react-navigation/native';
 import { useSelector, useDispatch } from 'react-redux';
 import { Container } from './styles';
-import api from '../../services/api';
+
+
 // import { Container } from './styles';
 
 export default function Collect({ navigation }) {
   const items = useSelector(state => state.items);
   const dispatch = useDispatch();
 
-  async function pushToServer() {
-    const response = await api.post('', items);
-    console.log(response.status);
-  }
+ 
   const newItem = {
     description: '',
     code: '',
@@ -25,6 +23,7 @@ export default function Collect({ navigation }) {
     dispatch({ type: 'ADD_BARCODE', item: newItem });
   }
 
+   
   if (items.length > 0) {
     console.log(items);
     return (
@@ -42,12 +41,11 @@ export default function Collect({ navigation }) {
           )}
           keyExtractor={item => item.code}
         />
-        <Button
-          style={styles.button}
+        <Button 
+          style={{backgroundColor:"black"}}
           title="Realizar Coleta"
           onPress={() => navigation.navigate('Scanner')}
         />
-        <Button title="Push to Server" onPress={() => pushToServer()} />
       </>
     );
   } else {

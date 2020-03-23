@@ -34,7 +34,7 @@ function barcodes(state = INITIAL_STATE, action) {
 
     case 'REMOVE_ITEM':
       var index = state.items.findIndex(x => x.code == action.item);
-      state.items.splice(index);
+      state.items.splice(index, 1);
       return { ...state, items: [...state.items] };
 
     case 'SET_QUANTITY':
