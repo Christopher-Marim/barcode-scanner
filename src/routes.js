@@ -12,7 +12,7 @@ import Scanner from './pages/Scanner';
 import Home from './pages/Home';
 import Collect from './pages/Collect';
 import MySettings from './pages/MySettings';
-import  HeaderButtonSend from './components/HeaderButtonSend';
+import HeaderButtonSend from './components/HeaderButtonSend';
 import Login from './pages/Login';
 
 const HomeStack = createStackNavigator();
@@ -34,7 +34,7 @@ function HomeTabsScreen() {
       tabBarOptions={{
         inactiveTintColor: 'white',
         activeTintColor: 'white',
-        style: { backgroundColor: '#0027FF' },
+        style: { backgroundColor: '#012554' },
 
         indicatorStyle: {
           borderBottomColor: 'white',
@@ -49,15 +49,6 @@ function HomeTabsScreen() {
       <HomeTabs.Screen name="Home" component={Home} />
       <HomeTabs.Screen name="Collect" component={Collect} />
     </HomeTabs.Navigator>
-  );
-}
-
-function LogoTitle() {
-  return (
-    <Image
-      style={{ width: 70, height: 70 }}
-      source={require('../assets/logo.png')}
-    />
   );
 }
 
@@ -82,7 +73,7 @@ function Routes() {
             cardStyleInterpolator: forFade,
             headerStyle: {
               height:0,
-              backgroundColor: '#0027FF',
+              backgroundColor: '#012554',
             },
             headerTintColor: 'white',
             
@@ -93,11 +84,10 @@ function Routes() {
           component={HomeTabsScreen}
           options={{
             headerRight: () => (
-             <HeaderButtonSend/>
+             <HeaderButtonSend />
             ),
             title: 'ETM',
             headerTitleAlign: 'center',
-            // headerLeft: props => <LogoTitle {...props} />,
             transitionSpec: {
               open: TransitionSpecs.TransitionIOSSpec,
               close: TransitionSpecs.TransitionIOSSpec,
@@ -111,7 +101,7 @@ function Routes() {
             },
             headerStyle: {
               height:60,
-              backgroundColor: '#0027FF',
+              backgroundColor: '#012554',
             },
             headerTintColor: 'white',
             gestureEnabled:false,
@@ -130,11 +120,13 @@ function Routes() {
             },
             cardStyleInterpolator: forFade,
             headerStyle: {
-              backgroundColor: '#0027FF',
+              backgroundColor: '#012554',
             },
             headerTintColor: 'white',
           }}
         />
+
+       
          <HomeStack.Screen
           name="MySettings"
           component={MySettings}
@@ -146,7 +138,7 @@ function Routes() {
             },
             cardStyleInterpolator: forFade,
             headerStyle: {
-              backgroundColor: '#0027FF',
+              backgroundColor: '#012554',
             },
             headerTintColor: 'white',
           }}

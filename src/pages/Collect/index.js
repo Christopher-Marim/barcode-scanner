@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import { View, StyleSheet, FlatList,Button } from 'react-native';
+import { View, StyleSheet, FlatList,Button, Text } from 'react-native';
 import Item from '../../components/ItemList';
 import { useFocusEffect } from '@react-navigation/native';
 import { useSelector, useDispatch } from 'react-redux';
 import { Container } from './styles';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 
 // import { Container } from './styles';
@@ -41,11 +42,12 @@ export default function Collect({ navigation }) {
           )}
           keyExtractor={item => item.code}
         />
-        <Button 
-          style={{backgroundColor:"black"}}
-          title="Realizar Coleta"
-          onPress={() => navigation.navigate('Scanner')}
-        />
+        <TouchableOpacity style={styles.action}
+         onPress={() => navigation.navigate('Scanner')}>
+           <Text style={styles.actionText}>Realizar Consulta</Text>
+
+        </TouchableOpacity>
+       
       </>
     );
   } else {
@@ -76,5 +78,23 @@ const styles = StyleSheet.create({
   },
   list: {
     paddingHorizontal: 20,
+  },
+  action:{
+    backgroundColor:'#012554',
+    borderRadius:5,
+    paddingHorizontal:15,
+    height: 45,
+    marginHorizontal:105,
+    width:'50%',
+    justifyContent:'center',
+    alignItems:"center",
+   
+  },
+  actionText:{
+    
+    color:'white',
+    fontSize:15,
+    fontWeight:'bold',
+
   },
 });

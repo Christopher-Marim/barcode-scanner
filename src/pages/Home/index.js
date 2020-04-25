@@ -1,18 +1,22 @@
 import React from 'react';
-import { StyleSheet, View, Button, Text} from 'react-native';
-import {Icon} from 'react-native-elements';
+
+import { StyleSheet, View, Text} from 'react-native';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 export default function Home({ navigation }) {
   return (
      
-    <View style={styles.container}>
-      <Button
-        style={styles.button}
-        title="Realizar consulta"
-        onPress={() => navigation.navigate('Scanner')}
-      >
-        <Text>Realizar consuuulta</Text>
-      </Button>
+    <View style={styles.container} >
+      
+      <View style={styles.actions}>
+        
+        <TouchableOpacity style={styles.action}
+         onPress={() => navigation.navigate('Scanner')}>
+           <Text style={styles.actionText}>Realizar Consulta</Text>
+
+        </TouchableOpacity>
+        
+      </View>
      
     </View>
 
@@ -26,10 +30,18 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-
-  button: {
-    backgroundColor: 'black',
-    
-    
+  action:{
+    backgroundColor:'#012554',
+    borderRadius:5,
+    paddingHorizontal:15,
+    height: 45,
+    width:'100%',
+    justifyContent:'center',
+    alignItems:"center",
+  },
+  actionText:{
+    color:'white',
+    fontSize:15,
+    fontWeight:'bold',
   },
 });

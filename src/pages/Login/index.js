@@ -9,6 +9,8 @@
 import React, {useState, useEffect} from 'react';
 import {View, KeyboardAvoidingView, Image, TextInput, TouchableOpacity, Text, StyleSheet, Animated} from 'react-native';
 
+import styles from './styles';
+
 
 export default function Login({navigation}){
 
@@ -80,53 +82,4 @@ useEffect(()=> {
       </KeyboardAvoidingView>
   );
 }
-const styles = StyleSheet.create({
-  background:{
-    flex:1,
-    alignItems:'center',
-    justifyContent:'center',
-    backgroundColor:'#C5D1E1',
-  },  
-  containerLogo:{
-    flex:1,
-    justifyContent:'center',
-  },
-  container:{
-    flex:1,
-    alignItems:'center',
-    justifyContent:'center',
-    width:'90%',
-    paddingBottom:50,
-  },
-  input:{
-    backgroundColor:'#FFF',
-    width:'90%',
-    marginBottom:15,
-    color: '#222',
-    fontSize:17,
-    borderRadius:7,
-    padding:10,
 
-  },
-  btnSubmit:{
-    backgroundColor:'#0027FF',
-    width:'90%',
-    height:45,
-    alignItems:'center',
-    justifyContent:'center',
-    borderRadius:7,
-
-  },
-  submitText:{
-    color: '#FFF',
-    fontSize:18,
-  },
-  btnSolicit:{
-    marginTop:10,
-  },
-  solicitText:{
-    color:'#FFF'
-  }
-
-
-});
