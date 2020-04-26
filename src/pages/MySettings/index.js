@@ -34,7 +34,7 @@ export default function MySettings({navigation}) {
 
   return (
     <View style={styles.container}>
-    <Modal
+    <Modal 
       animationType="fade"
       transparent={true}
       visible={modalVisible}
@@ -50,7 +50,7 @@ export default function MySettings({navigation}) {
     />
           <View style={styles.buttons}>   
             <TouchableHighlight
-              style={{ ...styles.openButton, backgroundColor: "#2196F3" }}
+              style={{ ...styles.openButton, backgroundColor: "#354EB0" }}
               onPress={() => {
                 setModalVisible(!modalVisible);
                 onChangeAuxServidor(server);
@@ -60,7 +60,7 @@ export default function MySettings({navigation}) {
             </TouchableHighlight>
 
             <TouchableHighlight
-              style={{ ...styles.openButton, backgroundColor: "#2196F3", marginLeft:20 }}
+              style={{ ...styles.openButton, backgroundColor: "#354EB0", marginLeft:20 }}
               onPress={twoOptionAlertHandler}
               >
               <Text style={styles.textStyle}>Aplicar</Text>
@@ -72,20 +72,21 @@ export default function MySettings({navigation}) {
     </Modal>
     
     <View style={styles.container}>
-      <TouchableOpacity style={styles.action}
-        onPress={() => {}}
-        >
-           <Text style={styles.actionText}>Importar Lista</Text>
-
-        </TouchableOpacity>
-  
+      <View style={styles.containerButtons}>
         <TouchableOpacity style={styles.action}
-          onPress={() => {setModalVisible(true)}}
+          onPress={() => {}}
           >
-           <Text style={styles.actionText}>Definir Servidor</Text>
+            <Text style={styles.actionText}>Importar Lista</Text>
 
-        </TouchableOpacity>
+          </TouchableOpacity>
     
+          <TouchableOpacity style={styles.action}
+            onPress={() => {setModalVisible(true)}}
+            >
+            <Text style={styles.actionText}>Definir Servidor</Text>
+
+          </TouchableOpacity>
+        </View>
     </View>
   </View>
 

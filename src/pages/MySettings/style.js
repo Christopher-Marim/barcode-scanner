@@ -5,22 +5,29 @@ export default  StyleSheet.create({
         flex: 1,
         flexDirection: 'column',
         backgroundColor: '#fff',
-        paddingTop:20,
+        paddingTop:5,
+        
         
         alignItems: 'stretch',
         justifyContent: 'flex-start',
       },
+      containerButtons:{
+        padding:0,
+        borderRadius:50
+      },
       action:{
-        marginBottom:10,
-        backgroundColor:'#ECEDF4',
-        borderRadius:5,
+        marginBottom:0,
+        backgroundColor:'white',
+        borderRadius:0,
         paddingHorizontal:15,
-        height: 75,
+        height: 55,
         width:'100%',
         justifyContent:'center',
         alignItems:"baseline",
-        borderBottomWidth:3,
-        borderBottomColor:'#D3D4D8'
+        borderBottomWidth:2,
+        borderBottomColor:'#D3D4D8',
+        borderLeftWidth:5,
+        borderLeftColor:'#012554'
       },
       actionText:{
         paddingLeft:20,

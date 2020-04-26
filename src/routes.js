@@ -27,10 +27,10 @@ const HomeTabs = createMaterialTopTabNavigator();
 
 function HomeTabsScreen() {
   return (
-    <HomeTabs.Navigator
-      tabBarPosition="top"
-      swipeEnabled="true"
-      animationEnable="enable"
+    <HomeTabs.Navigator 
+      tabBarPosition="none"
+      swipeEnabled="none"
+      animationEnable="none"
       tabBarOptions={{
         inactiveTintColor: 'white',
         activeTintColor: 'white',
@@ -47,8 +47,10 @@ function HomeTabsScreen() {
       }}
     >
       <HomeTabs.Screen name="Home" component={Home} />
-      <HomeTabs.Screen name="Collect" component={Collect} />
+      {/* <HomeTabs.Screen name="Collect" component={Collect} /> */}
     </HomeTabs.Navigator>
+    
+    
   );
 }
 
@@ -61,7 +63,7 @@ function Routes() {
       <HomeStack.Navigator
       initialRouteName="Login"
       >
-      <HomeStack.Screen
+      <HomeStack.Screen 
           name="Login"
           component={Login}
           options={{
@@ -100,8 +102,9 @@ function Routes() {
               fontFamily: 'serif',
             },
             headerStyle: {
-              height:60,
+              height:70,
               backgroundColor: '#012554',
+              
             },
             headerTintColor: 'white',
             gestureEnabled:false,
@@ -132,6 +135,22 @@ function Routes() {
           component={MySettings}
           options={{
             title: 'MySettings',
+            transitionSpec: {
+              open: TransitionSpecs.TransitionIOSSpec,
+              close: TransitionSpecs.TransitionIOSSpec,
+            },
+            cardStyleInterpolator: forFade,
+            headerStyle: {
+              backgroundColor: '#012554',
+            },
+            headerTintColor: 'white',
+          }}
+        />
+        <HomeStack.Screen
+          name="Collect"
+          component={Collect}
+          options={{
+            title: 'Collect',
             transitionSpec: {
               open: TransitionSpecs.TransitionIOSSpec,
               close: TransitionSpecs.TransitionIOSSpec,
