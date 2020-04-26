@@ -16,15 +16,11 @@ export const DescriptionView = styled.View`
   flex: 1;
 `;
 
-export const DateView = styled.View`
-  flex-direction: row;
-`;
-
-export const InputDescription = styled.TextInput`
+export const TextDescription = styled.Text`
   font-size: 20px;
 `;
 
-export const TextDate = styled.Text`
+export const TextCode = styled.Text`
   font-size: 15px;
 `;
 

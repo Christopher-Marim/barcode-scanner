@@ -9,10 +9,9 @@ import {
   Alert
 } from "react-native";
 import {useDispatch, useSelector} from 'react-redux'
-import {Overlay} from 'react-native-elements';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import PopUpNewCollect from '../../components/PopUpCollect';
-
+import Inventory from '../../components/CollectList';
 import styles from './styles';
 
 export default function Home({ navigation }) {
@@ -22,25 +21,15 @@ export default function Home({ navigation }) {
   
   const dispatch = useDispatch();
 
-  function Item({ title }) {
-    return (
-      <View style={styles.item}>
-        <TouchableOpacity onPress={() => navigation.navigate("Collect")}>
-          <Text style={styles.title}>{title}</Text>
-        </TouchableOpacity>
-        
-      </View>
-    );
-  }
-
   function pop(){
     dispatch({ type: 'SHOWPOPUP', value: true });
   }  
     return(
       <SafeAreaView style={styles.container1}>
+        
         <FlatList
           data={inventories}
-          renderItem={({ item }) => <Item title={item.title} />}
+          renderItem={({ item }) => <Inventory collectName={item.collectName} collectDate={item.collectDate} />}
           keyExtractor={item => item.id}
         />
 

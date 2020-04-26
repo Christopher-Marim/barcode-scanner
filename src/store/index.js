@@ -74,7 +74,9 @@ function barcodes(state = INITIAL_STATE, action) {
       console.log('onPress:', action.value);
       
       return {...state, isPopUpOpened: [action.value]};
-
+    case 'SET_COLLECTNAME':
+      console.log('collect set');
+      
     default:
       return state;
   }

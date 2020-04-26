@@ -3,57 +3,41 @@ import { Text, View, StyleSheet } from 'react-native';
 import { Icon } from 'react-native-elements';
 import { useDispatch, useSelector } from 'react-redux';
 import {
-  ItemContainer,
-  InputDescription,
-  InputQuantity,
   DescriptionView,
-  AddButton,
-  RemoveButton,
-  QuantityView,
-  TextCode,
+  ItemContainer,
+  TextDescription,
   TrashButton,
+  TextCode
 } from './styles';
 
-export default function Item({ collectName, collectDate }) {
+export default function Inventory({ name, creationDate }) {
   const dispatch = useDispatch();
 
   const [inDescription, setInDescription] = useState('');
-  const items = useSelector(state => state.items);
+  const inventories = useSelector(state => state.inventories);
   // var strQty = ;
-  useEffect(() => {
-    // Atualiza o titulo do documento usando a API do browser
-    setInputQty(quantidade);
-  }, [quantidade]);
 
-//   function removeItem(code) {
-//     setInputQty(inputQty - 1);
-//     dispatch({ type: 'REMOVE_INVENTORY', item: code });
-//   }
+  function removeItem(code) {
+    setInputQty(inputQty - 1);
+    dispatch({ type: 'REMOVE_ITEM', inventories: code });
+  }
 
-//   function handleSetDescription() {
-//     dispatch({ type: 'SET_COLLECTNAME', item: [codigo, inDescription] });
-//   }
+  function handleSetDescription() {
+    dispatch({ type: 'SET_DESCRIPTION', inventories: [codigo, inDescription] });
+  }
 
   return (
     <ItemContainer>
       <DescriptionView>
-        <InputDescription
-          autoCorrect={false}
-          placeholder="Adicionar Nome da Coleta"
-          value={collectName}
-          onChangeText={text => setInDescription(text)}
-          onBlur={handleSetDescription}
-        />
-        <TextCode>{collectDate}</TextCode>
+        <TextDescription>{name}</TextDescription>
+        <TextCode>{creationDate}</TextCode>
       </DescriptionView>
 
-      <QuantityView>
         <View style={{ alignItems: 'flex-end' }}>
-          <TrashButton /*onPress={() => removeItem(codigo)}*/>
+          <TrashButton onPress={() => removeItem(codigo)}>
             <Icon name="delete" color="white" />
           </TrashButton>
         </View>
-      </QuantityView>
     </ItemContainer>
   );
 }
