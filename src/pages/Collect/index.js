@@ -1,65 +1,62 @@
 import React, { useState } from 'react';
-import { View, StyleSheet, FlatList,Button } from 'react-native';
+import { Text, View, StyleSheet, FlatList,Button } from 'react-native';
 import Item from '../../components/ItemList';
 import { useFocusEffect } from '@react-navigation/native';
 import { useSelector, useDispatch } from 'react-redux';
 import { Container } from './styles';
 
 
+
 // import { Container } from './styles';
 
 export default function Collect({ navigation }) {
-  const items = useSelector(state => state.items);
-  const dispatch = useDispatch();
+  
+  return(<Text>teste</Text>)
+  // const items = useSelector(state => state.inventories);
+  
+  // const dispatch = useDispatch();
 
- 
-  const newItem = {
-    description: '',
-    code: '',
-    qty: 1,
-  };
-
-  function addItemToList(codigo) {
-    dispatch({ type: 'ADD_BARCODE', item: newItem });
-  }
+  // function addItemToList(codigo) {
+  //   dispatch({ type: 'ADD_BARCODE', item: newItem });
+  // }
 
    
-  if (items.length > 0) {
-    console.log(items);
-    return (
-      <>
-        <FlatList
-          style={{ marginTop: 10 }}
-          contentContainerStyle={styles.list}
-          data={items}
-          renderItem={({ item }) => (
-            <Item
-              description={item.description}
-              codigo={item.code}
-              quantidade={item.qty}
-            />
-          )}
-          keyExtractor={item => item.code}
-        />
-        <Button 
-          style={{backgroundColor:"black"}}
-          title="Realizar Coleta"
-          onPress={() => navigation.navigate('Scanner')}
-        />
-      </>
-    );
-  } else {
-    return (
-      <>
-        <Button
-          style={styles.button}
-          title="Realizar Coleta"
-          onPress={() => navigation.navigate('Scanner')}
-        />
-        <Button title="AddtoList" onPress={() => addItemToList()} />
-      </>
-    );
-  }
+  // if (items.length > 0) {
+  //   console.log('Itens Coletados: ',items);
+  //   return (
+  //     <>
+  //       <FlatList
+  //         style={{ marginTop: 10 }}
+  //         contentContainerStyle={styles.list}
+  //         data={items}
+  //         renderItem={({ item }) => (
+  //           <Item
+  //             description={item.description}
+  //             codigo={item.code}
+  //             quantidade={item.collectedQty}
+  //           />
+  //         )}
+  //         keyExtractor={item => item.code}
+  //       />
+  //       <Button 
+  //         style={{backgroundColor:"black"}}
+  //         title="Realizar Coleta"
+  //         onPress={() => navigation.navigate('Scanner')}
+  //       />
+  //     </>
+  //   );
+  // } else {
+  //   return (
+  //     <>
+  //       <Button
+  //         style={styles.button}
+  //         title="Realizar Coleta"
+  //         onPress={() => navigation.navigate('Scanner')}
+  //       />
+  //       <Button title="AddtoList" onPress={() => addItemToList()} />
+  //     </>
+  //   );
+  // }
 }
 const styles = StyleSheet.create({
   button: {
