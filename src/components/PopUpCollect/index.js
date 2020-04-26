@@ -1,25 +1,32 @@
 import React, {useState} from 'react';
-
 import {
   Text,
   TouchableHighlight,
   View,
-  TextInput, 
-  FlatList,
-  SafeAreaView
+  TextInput
 } from "react-native";
+import {useDispatch} from 'react-redux';
 import {Overlay} from 'react-native-elements';
+import styles from './styles'
 
-export default function PopUpCollect(){
-
+export default function PopUpCollect(props){
+    const dispatch = useDispatch();    
     const [moreOpened, setMoreOpened] = useState(true);
-    const [buttonVisible, setButVisible] = useState(1);
-    const [auxColeta, onChangeAuxColeta] = React.useState("");
-    const [newcoleta, setColeta] = useState();
+    const [auxColeta, onChangeAuxColeta] = useState("");
+    const [newcoleta, setColeta] = useState();  
+    
+    function hidePopUp(){
+      dispatch({ type: 'SHOWPOPUP', value: false });
+    }
+    
+    function createCollect(){
+
+    }
+
     return(
         <Overlay height={200}
-          isVisible={moreOpened}
-          onBackdropPress={() => setMoreOpened(!moreOpened)}
+          isVisible={props.isButtonPressed}
+          onBackdropPress={true}
           >
            <View style={styles.modalView}>
             <Text style={styles.modalText}>Criar Coleta</Text>
@@ -32,9 +39,7 @@ export default function PopUpCollect(){
                 <View style={styles.buttons}>   
                   <TouchableHighlight
                     style={{ ...styles.openButton,  }}
-                    onPress={() => {
-                    setMoreOpened(!moreOpened);
-                    onChangeAuxColeta("");}}
+                    onPress={hidePopUp}
                     >
                       <Text style={styles.textStyle}>Cancelar</Text>
                   </TouchableHighlight>
@@ -44,8 +49,7 @@ export default function PopUpCollect(){
                     onPress={() => {
                       setColeta(auxColeta),
                       onChangeAuxColeta(""),
-                      setMoreOpened(!moreOpened),
-                      setButVisible(0)
+                      hidePopUp
                     }}
                     >
                     <Text style={styles.textStyle}>Criar</Text>

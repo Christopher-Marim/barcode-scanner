@@ -1,18 +1,41 @@
 import { createStore } from 'redux';
 
 const INITIAL_STATE = {
-  items: [
+  isPopUpOpened: [false],
+  inventories: [
     {
-      description: 'Description',
-      code: '321321',
-      qty: 1,
-    },
+      collectName: 'Coleta 1',
+      collectDate: '10/04/2020',
+      items: [
+        {
+          description: 'Description',
+          code: '321321',
+          qty: 1,
+        },
+        {
+          description: 'Description',
+          code: '32132154',
+          qty: 3,
+        },
+      ],
+    }, 
     {
-      description: 'Description',
-      code: '32132154',
-      qty: 3,
-    },
-  ],
+      collectName: 'Coleta 2',
+      collectDate: '03/03/2020',
+      items: [
+        {
+          description: 'Description Col 2',
+          code: '321321',
+          qty: 1,
+        },
+        {
+          description: 'Description 1 Col 2',
+          code: '32132154',
+          qty: 3,
+        },
+      ],
+    }
+  ]
 };
 
 function barcodes(state = INITIAL_STATE, action) {
@@ -47,6 +70,10 @@ function barcodes(state = INITIAL_STATE, action) {
       state.items.find(x => x.code == action.item[0]).description =
         action.item[1];
       return { ...state, items: [...state.items] };
+    case 'SHOWPOPUP':
+      console.log('onPress:', action.value);
+      
+      return {...state, isPopUpOpened: [action.value]};
 
     default:
       return state;

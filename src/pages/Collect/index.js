@@ -1,9 +1,6 @@
-import React, { useState } from 'react';
-import { View, StyleSheet, FlatList,Button, Text } from 'react-native';
+import { StyleSheet, FlatList,Button, Text } from 'react-native';
 import Item from '../../components/ItemList';
-import { useFocusEffect } from '@react-navigation/native';
 import { useSelector, useDispatch } from 'react-redux';
-import { Container } from './styles';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
 
