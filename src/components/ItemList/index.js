@@ -4,7 +4,7 @@ import { Icon } from 'react-native-elements';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   ItemContainer,
-  InputDescription,
+  TextDescription,
   InputQuantity,
   DescriptionView,
   AddButton,
@@ -51,13 +51,7 @@ export default function Item({ description, codigo, quantidade }) {
   return (
     <ItemContainer>
       <DescriptionView>
-        <InputDescription
-          autoCorrect={false}
-          placeholder="Adicionar Descrição"
-          value={inDescription}
-          onChangeText={text => setInDescription(text)}
-          onBlur={handleSetDescription}
-        />
+        <TextDescription>{description}</TextDescription>
         <TextCode>{codigo}</TextCode>
       </DescriptionView>
 
