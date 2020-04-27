@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { Text, View, StyleSheet } from 'react-native';
+import { View, TouchableWithoutFeedback } from 'react-native';
 import { Icon } from 'react-native-elements';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+
 import {
   DescriptionView,
   ItemContainer,
@@ -10,12 +11,10 @@ import {
   TextCode
 } from './styles';
 
-export default function Inventory({ name, creationDate }) {
+export default function Inventory({ nav, name, creationDate }) {
   const dispatch = useDispatch();
 
   const [inDescription, setInDescription] = useState('');
-  const inventories = useSelector(state => state.inventories);
-  // var strQty = ;
 
   function removeItem(code) {
     setInputQty(inputQty - 1);
@@ -26,18 +25,22 @@ export default function Inventory({ name, creationDate }) {
     dispatch({ type: 'SET_DESCRIPTION', inventories: [codigo, inDescription] });
   }
 
+
   return (
     <ItemContainer>
+      
       <DescriptionView>
         <TextDescription>{name}</TextDescription>
         <TextCode>{creationDate}</TextCode>
       </DescriptionView>
-
-        <View style={{ alignItems: 'flex-end' }}>
+      <View>
+      <View style={{alignItems: 'flex-end' }}>
           <TrashButton onPress={() => removeItem(codigo)}>
             <Icon name="delete" color="white" />
           </TrashButton>
         </View>
+      </View>
+      
     </ItemContainer>
   );
 }

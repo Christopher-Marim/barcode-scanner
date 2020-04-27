@@ -10,52 +10,52 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 
 export default function Collect({ navigation }) {
   
-  return(<Text>teste</Text>)
-  // const items = useSelector(state => state.inventories);
+  const items = useSelector(state => state.inventories);
+  const currentInventory = useSelector(state => state.currentInventory);
   
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
-  // function addItemToList(codigo) {
-  //   dispatch({ type: 'ADD_BARCODE', item: newItem });
-  // }
+  function addItemToList(codigo) {
+    dispatch({ type: 'ADD_BARCODE', item: newItem });
+  }
 
-   
-  // if (items.length > 0) {
-  //   console.log('Itens Coletados: ',items);
-  //   return (
-  //     <>
-  //       <FlatList
-  //         style={{ marginTop: 10 }}
-  //         contentContainerStyle={styles.list}
-  //         data={items}
-  //         renderItem={({ item }) => (
-  //           <Item
-  //             description={item.description}
-  //             codigo={item.code}
-  //             quantidade={item.collectedQty}
-  //           />
-  //         )}
-  //         keyExtractor={item => item.code}
-  //       />
-  //       <Button 
-  //         style={{backgroundColor:"black"}}
-  //         title="Realizar Coleta"
-  //         onPress={() => navigation.navigate('Scanner')}
-  //       />
-  //     </>
-  //   );
-  // } else {
-  //   return (
-  //     <>
-  //       <Button
-  //         style={styles.button}
-  //         title="Realizar Coleta"
-  //         onPress={() => navigation.navigate('Scanner')}
-  //       />
-  //       <Button title="AddtoList" onPress={() => addItemToList()} />
-  //     </>
-  //   );
-  // }
+  if (items[currentInventory[0] - 1].length > 0) {
+    console.log('Itens Coletados: ',items[currentInventory[0] - 1]);
+    console.log('cur inve: ',currentInventory);
+    return (
+      <>
+        <FlatList
+          style={{ marginTop: 10 }}
+          contentContainerStyle={styles.list}
+          data={items[currentInventory[0] - 1]}
+          renderItem={({ item }) => (
+            <Item
+              description={item.description}
+              codigo={item.code}
+              quantidade={item.collectedQty}
+            />
+          )}
+          keyExtractor={item => item.code}
+        />
+        <Button 
+          style={{backgroundColor:"black"}}
+          title="Realizar Coleta"
+          onPress={() => navigation.navigate('Scanner')}
+        />
+      </>
+    );
+  } else {
+    return (
+      <>
+        <Button
+          style={styles.button}
+          title="Realizar Coleta"
+          onPress={() => navigation.navigate('Scanner')}
+        />
+        <Button title="AddtoList" onPress={() => addItemToList()} />
+      </>
+    );
+  }
 }
 const styles = StyleSheet.create({
   button: {

@@ -3,6 +3,7 @@ import { createStore } from 'redux';
 
 
 const INITIAL_STATE = {
+  currentInventory: [0],
   isPopUpOpened: [false],
   inventories:[
     {
@@ -90,7 +91,7 @@ function barcodes(state = INITIAL_STATE, action) {
       return { ...state, items: [...state.items] };
 
     case 'REMOVE_ITEM':
-      var index = state.items.findIndex(x => x.code == action.item);
+      const index = state.items.findIndex(x => x.code == action.item);
       state.items.splice(index, 1);
       return { ...state, items: [...state.items] };
 
@@ -104,13 +105,27 @@ function barcodes(state = INITIAL_STATE, action) {
       state.items.find(x => x.code == action.item[0]).description =
         action.item[1];
       return { ...state, items: [...state.items] };
+    
+    case 'NEW_COLLECT':
+      console.log('inventory collect action: ', action.inventory);
+      
+      const inventory = {
+        id: 3,
+        collectName: action.inventory[0],
+        collectDate: action.inventory[1],
+      }
+      return {...state, inventories: [...state.inventories, inventory ]}
     case 'SHOWPOPUP':
       console.log('onPress:', action.value);
       
       return {...state, isPopUpOpened: [action.value]};
     case 'SET_COLLECTNAME':
       console.log('collect set');
+
+    case 'SET_CURRENT_INVENTORY':
+      console.log('current inventory:', action.idToShow);
       
+      return {...state, currentInventory: [action.idToShow]}
     default:
       return state;
   }

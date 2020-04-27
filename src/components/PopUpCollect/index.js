@@ -11,30 +11,31 @@ import styles from './styles'
 
 export default function PopUpCollect(props){
     const dispatch = useDispatch();    
-    const [moreOpened, setMoreOpened] = useState(true);
-    const [auxColeta, onChangeAuxColeta] = useState("");
-    const [newcoleta, setColeta] = useState();  
+    const [collectName, setCollectName] = useState("");
     
     function hidePopUp(){
       dispatch({ type: 'SHOWPOPUP', value: false });
     }
     
-    function createCollect(){
+    function createCollect(name){
+      const d = new Date;
+      const date = d.getDate() + '/' + (d.getMonth() +1) + '/' + d.getFullYear();
 
+      dispatch({type: 'NEW_COLLECT', inventory: [name, date]});
     }
 
     return(
         <Overlay height={200}
           isVisible={props.isButtonPressed}
-          onBackdropPress={true}
+          onBackdropPress={hidePopUp}
           >
            <View style={styles.modalView}>
             <Text style={styles.modalText}>Criar Coleta</Text>
               <TextInput
                 style={styles.inputColeta }
                 placeholder='Nome da Coleta'
-                onChangeText={coleta => onChangeAuxColeta(coleta)}
-                value={auxColeta}/>
+                onChangeText={coleta => setCollectName(coleta)}
+               />
 
                 <View style={styles.buttons}>   
                   <TouchableHighlight
@@ -47,9 +48,8 @@ export default function PopUpCollect(props){
                   <TouchableHighlight
                     style={{ ...styles.openButton, marginLeft:20 }}
                     onPress={() => {
-                      setColeta(auxColeta),
-                      onChangeAuxColeta(""),
-                      hidePopUp
+                      createCollect(collectName);
+                      hidePopUp;
                     }}
                     >
                     <Text style={styles.textStyle}>Criar</Text>

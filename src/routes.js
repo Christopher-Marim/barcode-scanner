@@ -1,12 +1,9 @@
 import * as React from 'react';
 
-import { Image,View} from 'react-native';
-import { Icon, Button } from 'react-native-elements';
-
 import { createStackNavigator, TransitionSpecs } from '@react-navigation/stack';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { MenuContext } from 'react-native-popup-menu'
+import { MenuProvider } from 'react-native-popup-menu'
 
 import Scanner from './pages/Scanner';
 import Home from './pages/Home';
@@ -23,45 +20,14 @@ const forFade = ({ current, closing }) => ({
   },
 });
 
-const HomeTabs = createMaterialTopTabNavigator();
-
-function HomeTabsScreen() {
-  return (
-    <HomeTabs.Navigator 
-      tabBarPosition="none"
-      swipeEnabled="none"
-      animationEnable="none"
-      tabBarOptions={{
-        inactiveTintColor: 'white',
-        activeTintColor: 'white',
-        style: { backgroundColor: '#012554' },
-
-        indicatorStyle: {
-          borderBottomColor: 'white',
-          borderBottomWidth: 2,
-        },
-
-        labelStyle: {
-          fontSize: 12,
-        },
-      }}
-    >
-      <HomeTabs.Screen name="Home" component={Home} />
-      {/* <HomeTabs.Screen name="Collect" component={Collect} /> */}
-    </HomeTabs.Navigator>
-    
-    
-  );
-}
-
 function Routes() {
   return (
     <SafeAreaView
       style={{ flex: 1, justifyContent: 'space-between', alignItens: 'center' }}
     >
-      <MenuContext placement="bottom">
+      <MenuProvider placement="bottom">
       <HomeStack.Navigator
-      initialRouteName="Login"
+        initialRouteName="Login"
       >
       <HomeStack.Screen 
           name="Login"
@@ -83,7 +49,7 @@ function Routes() {
         />
         <HomeStack.Screen
           name="Home"
-          component={HomeTabsScreen}
+          component={Home}
           options={{
             headerRight: () => (
              <HeaderButtonSend />
@@ -128,13 +94,12 @@ function Routes() {
             headerTintColor: 'white',
           }}
         />
-
-       
+        
          <HomeStack.Screen
           name="MySettings"
           component={MySettings}
           options={{
-            title: 'MySettings',
+            title: 'Configurações',
             transitionSpec: {
               open: TransitionSpecs.TransitionIOSSpec,
               close: TransitionSpecs.TransitionIOSSpec,
@@ -163,7 +128,7 @@ function Routes() {
           }}
         />
       </HomeStack.Navigator>
-      </MenuContext>
+      </MenuProvider>
 
     </SafeAreaView>
   );

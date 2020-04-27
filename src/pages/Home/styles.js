@@ -8,6 +8,9 @@ export default  StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
       },
+      list: {
+        paddingHorizontal: 20,
+      },
       action:{
         backgroundColor:'#012554',
         borderRadius:5,
@@ -98,17 +101,23 @@ export default  StyleSheet.create({
         justifyContent:'center',
         alignItems:"center",
       },
-      positionButtonMore:{
-        alignItems:'flex-end',
-        justifyContent:"flex-end", 
-        paddingRight:20, 
-        paddingBottom:20
+      fabAdd:{
+        backgroundColor:'#012554',
+        borderRadius:100,
+        height: 60,
+        width: 60,
+        position: 'absolute',
+        bottom: 0,
+        right: 0, 
+        justifyContent: 'center',
+        alignItems: 'center',
+        margin: 20
       },
       textButtonMore:{
-        fontWeight:"bold", 
+            fontWeight:"bold", 
             color:'white', 
             fontSize:35, 
-            paddingBottom:3
+           
 
       }
    
