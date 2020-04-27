@@ -2,15 +2,10 @@ import React, { useState } from 'react';
 import { Text, View, StyleSheet, FlatList,Button } from 'react-native';
 import Item from '../../components/ItemList';
 import { useSelector, useDispatch } from 'react-redux';
-import { TouchableOpacity } from 'react-native-gesture-handler';
-
-
-
-// import { Container } from './styles';
 
 export default function Collect({ navigation }) {
   
-  const items = useSelector(state => state.inventories);
+  const inventories = useSelector(state => state.inventories);
   const currentInventory = useSelector(state => state.currentInventory);
   
   const dispatch = useDispatch();
@@ -18,16 +13,16 @@ export default function Collect({ navigation }) {
   function addItemToList(codigo) {
     dispatch({ type: 'ADD_BARCODE', item: newItem });
   }
-
-  if (items[currentInventory[0] - 1].length > 0) {
-    console.log('Itens Coletados: ',items[currentInventory[0] - 1]);
-    console.log('cur inve: ',currentInventory);
+  const items = inventories[currentInventory[0] - 1].collectedItems;
+  console.log('Itens Coletados: ', items);
+  
+  if (items.length > 0) {
     return (
       <>
         <FlatList
           style={{ marginTop: 10 }}
           contentContainerStyle={styles.list}
-          data={items[currentInventory[0] - 1]}
+          data={items}
           renderItem={({ item }) => (
             <Item
               description={item.description}

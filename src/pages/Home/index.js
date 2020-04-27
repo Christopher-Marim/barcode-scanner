@@ -21,7 +21,7 @@ export default function Home({ navigation }) {
 
   function goToCollect(id){
     dispatch({ type: 'SET_CURRENT_INVENTORY', idToShow: id });
-    navigation.navigate('Home');
+    navigation.navigate('Collect');
   }
 
    return(
@@ -34,14 +34,11 @@ export default function Home({ navigation }) {
           data={inventories}
           renderItem={({item}) =>
             <View>
-              <TouchableWithoutFeedback onPress={goToCollect(item.id)}>
                   <Inventory
-                    nav={navigation.navigate}
+                    currentInventory={item.id}
                     name={item.collectName}
                     creationDate={item.collectDate}
                   />
-              </TouchableWithoutFeedback>
-           
               </View>
             
           }

@@ -12,10 +12,10 @@ const INITIAL_STATE = {
       collectDate: '25/06/2010',
       collectedItems: [
         {
-          description: '',
-          code: '',
+          description: 'item collect 1',
+          code: '1111',
           qty: 0,
-          collectedQty: '',
+          collectedQty: '1',
         }
       ],
     },
@@ -25,10 +25,10 @@ const INITIAL_STATE = {
       collectDate: '25/06/2010',
       collectedItems: [
         {
-          description: '',
-          code: '',
+          description: 'item collect 2',
+          code: '2222',
           qty: 0,
-          collectedQty: '',
+          collectedQty: '2',
         }
       ],
     }
@@ -68,18 +68,19 @@ function barcodes(state = INITIAL_STATE, action) {
       console.log('search return:', x);
       console.log('action item:', action.item);
       if (x != undefined){
-        console.log('not undefined');
+        
         let auxItem = x;
         auxItem = {...auxItem, 'collectedQty':1}
-        return {...state, items:[...state.items, auxItem]}
+        return {...state, inventories:[...state.inventories[currentInventory].collectedItems, auxItem]}
       }else{
+
         let auxItem = {
           description: "",
           code: action.item,
           collectedQty: 1,
           qty: 0
         }
-        return {...state, items:[...state.items, auxItem]}
+        return {...state, inventories:[...state.inventories[currentInventory].collectedItems, auxItem]}
       }
 
     case 'INCREASE_QUANTITY':
