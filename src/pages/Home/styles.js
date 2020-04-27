@@ -9,7 +9,9 @@ export default  StyleSheet.create({
         justifyContent: 'center',
       },
       list: {
-        paddingHorizontal: 20,
+        paddingLeft:5,
+        paddingRight: 20,
+        
       },
       action:{
         backgroundColor:'#012554',
@@ -80,6 +82,7 @@ export default  StyleSheet.create({
         shadowOpacity: 0.25,
         shadowRadius: 3.84,
         elevation: 5
+        
       
       },
       item: {

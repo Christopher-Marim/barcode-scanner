@@ -49,8 +49,9 @@ export default function PopUpCollect(props){
                     style={{ ...styles.openButton, marginLeft:20 }}
                     onPress={() => {
                       createCollect(collectName);
-                      hidePopUp;
+                      
                     }}
+                    onPressOut={hidePopUp}
                     >
                     <Text style={styles.textStyle}>Criar</Text>
                   </TouchableHighlight>

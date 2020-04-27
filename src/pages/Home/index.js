@@ -21,7 +21,7 @@ export default function Home({ navigation }) {
 
   function goToCollect(id){
     dispatch({ type: 'SET_CURRENT_INVENTORY', idToShow: id });
-    navigation.navigate('Collect');
+    navigation.navigate('Home');
   }
 
    return(
@@ -29,7 +29,7 @@ export default function Home({ navigation }) {
      <SafeAreaView stye={styles.container1}>
        <View>
         <FlatList
-          style={{ marginTop: 10 }}
+          style={{ marginTop: 5, borderRadius:50,  }}
           contentContainerStyle={styles.list}
           data={inventories}
           renderItem={({item}) =>

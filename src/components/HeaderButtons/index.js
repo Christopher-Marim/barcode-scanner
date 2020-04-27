@@ -19,7 +19,7 @@ import styles from './styles';
 
 // import { Container } from './styles';
 
-export default function HeaderButtonSend() {
+export default function HeaderButtons() {
 
   const [moreOpened, setMoreOpened] = useState(false);
 
@@ -51,6 +51,11 @@ const navigation = useNavigation();
     }
     console.log(response.status);
   }
+
+  function hideMenu(){
+    setMoreOpened(false);
+
+  }
   return (
  
      <View style={{flexDirection: "row",alignItems:'baseline',height:50,}}>
@@ -61,6 +66,8 @@ const navigation = useNavigation();
       
       <View style={{paddingLeft:20, paddingRight:7}} >
         <Menu opened={moreOpened}
+        onBackdropPress={hideMenu}
+        
         >
           <MenuTrigger 
              onPress={() => {setMoreOpened(true)}}>
@@ -70,8 +77,9 @@ const navigation = useNavigation();
 
           <MenuOptions >
           
-          <TouchableOpacity style={styles.action}
-              
+          <TouchableOpacity 
+          style={styles.action}
+                
                onPress={() => {navigation.navigate('MySettings'),setMoreOpened(!moreOpened)} }>
                  
                 <Text style={styles.actionText}>

@@ -5,14 +5,14 @@ import { createMaterialTopTabNavigator } from '@react-navigation/material-top-ta
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { MenuProvider } from 'react-native-popup-menu'
 
+const HomeStack = createStackNavigator();
+
 import Scanner from './pages/Scanner';
 import Home from './pages/Home';
 import Collect from './pages/Collect';
 import MySettings from './pages/MySettings';
-import HeaderButtonSend from './components/HeaderButtonSend';
+import HeaderButtons from './components/HeaderButtons';
 import Login from './pages/Login';
-
-const HomeStack = createStackNavigator();
 
 const forFade = ({ current, closing }) => ({
   cardStyle: {
@@ -20,7 +20,7 @@ const forFade = ({ current, closing }) => ({
   },
 });
 
-function Routes() {
+export default function Routes() {
   return (
     <SafeAreaView
       style={{ flex: 1, justifyContent: 'space-between', alignItens: 'center' }}
@@ -28,6 +28,7 @@ function Routes() {
       <MenuProvider placement="bottom">
       <HomeStack.Navigator
         initialRouteName="Login"
+       
       >
       <HomeStack.Screen 
           name="Login"
@@ -52,7 +53,7 @@ function Routes() {
           component={Home}
           options={{
             headerRight: () => (
-             <HeaderButtonSend />
+             <HeaderButtons />
             ),
             title: 'ETM',
             headerTitleAlign: 'center',
@@ -134,4 +135,3 @@ function Routes() {
   );
 }
 
-export default Routes;
