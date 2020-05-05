@@ -12,6 +12,7 @@ import Home from './pages/Home';
 import Collect from './pages/Collect';
 import MySettings from './pages/MySettings';
 import HeaderButtons from './components/HeaderButtons';
+import SearchButton from './components/SearchButton';
 import Login from './pages/Login';
 
 const forFade = ({ current, closing }) => ({
@@ -51,10 +52,14 @@ export default function Routes() {
         <HomeStack.Screen
           name="Home"
           component={Home}
+         
           options={{
             headerRight: () => (
-             <HeaderButtons />
+             <HeaderButtons></HeaderButtons>
             ),
+            headerLeft: () => (
+              <SearchButton />
+             ),
             title: 'ETM',
             headerTitleAlign: 'center',
             transitionSpec: {
@@ -75,7 +80,9 @@ export default function Routes() {
             },
             headerTintColor: 'white',
             gestureEnabled:false,
-            headerLeft:null
+            
+            
+            
             
           }}
         />

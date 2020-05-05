@@ -1,10 +1,10 @@
-import React, {useState} from 'react';
-import { View, Text, ToastAndroid, Alert} from 'react-native';
+import React, {useState, useRef } from 'react';
+import { View, Text, ToastAndroid, Alert, Dimensions} from 'react-native';
 
 import { Icon,Button } from 'react-native-elements';
 import { useNavigation} from '@react-navigation/native';
 import { TouchableOpacity  } from 'react-native-gesture-handler';
-import {SettingsButton} from '../../components/SettingsButton'
+
 import {
   MenuProvider,
   Menu,
@@ -22,23 +22,20 @@ import styles from './styles';
 export default function HeaderButtons() {
 
   const [moreOpened, setMoreOpened] = useState(false);
-
-twoOptionAlertHandler = () =>{
-  Alert.alert(
-    'Enviar ao servidor',
-    'Tudo certo para enviar ao servidor?',
-    [
-      {text:'Sim', onPress:() => pushToServer() },
-      {text:'Não', onPress:() => console.log('Ação cancelada'),style:'cancel',},
-    ],
-    {cancelable:false}
-  );
-};
-
-const navigation = useNavigation();
-
-
+  const navigation = useNavigation();
   const items = useSelector(state => state.items);
+
+  twoOptionAlertHandler = () =>{
+    Alert.alert(
+      'Enviar ao servidor',
+      'Tudo certo para enviar ao servidor?',
+      [
+        {text:'Sim', onPress:() => pushToServer() },
+        {text:'Não', onPress:() => console.log('Ação cancelada'),style:'cancel',},
+      ],
+      {cancelable:false}
+    );
+  };
 
   async function pushToServer() {
     
@@ -52,13 +49,14 @@ const navigation = useNavigation();
     console.log(response.status);
   }
 
-  function hideMenu(){
-    setMoreOpened(false);
-
+  function showSearch(){
+    
   }
+
   return (
- 
-     <View style={{flexDirection: "row",alignItems:'baseline',height:50,}}>
+    <View>
+      
+     <View style={{flexDirection: "row",alignItems:'baseline',height:45,}}>
       <Button type="clear" 
        icon={<Icon name="send" color="white" />} 
        onPress={twoOptionAlertHandler}
@@ -66,7 +64,7 @@ const navigation = useNavigation();
       
       <View style={{paddingLeft:20, paddingRight:7}} >
         <Menu opened={moreOpened}
-        onBackdropPress={hideMenu}
+        onBackdropPress={()=> setMoreOpened(false)}
         
         >
           <MenuTrigger 
@@ -89,8 +87,12 @@ const navigation = useNavigation();
 
           </MenuOptions>
         </Menu>
+
+        
       </View>
 
+
+      </View>
       </View>
     
   );

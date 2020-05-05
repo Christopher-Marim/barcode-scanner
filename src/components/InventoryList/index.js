@@ -4,14 +4,14 @@ import {
    TouchableWithoutFeedback, 
    Text, 
    Alert,
-   TouchableHighlight } from 'react-native';
+   TouchableHighlight, Dimensions } from 'react-native';
 
 import Modal from 'react-native-modal';
 import { Icon } from 'react-native-elements';
 import { TouchableOpacity  } from 'react-native-gesture-handler';
 import { useNavigation } from '@react-navigation/native';
 import { useDispatch } from 'react-redux';
-import Toast from '../Toast'
+// import Toast from '../Toast'
 
 import {
   MenuProvider,
@@ -66,7 +66,7 @@ export default function Inventory({ currentInventory, name, creationDate }) {
   }
   
   return (<View>
-    {/* <View >
+    <View >
       <Modal 
         animationIn='fadeIn'
         transparent={true}
@@ -74,6 +74,7 @@ export default function Inventory({ currentInventory, name, creationDate }) {
         style={{margin:0, padding:0, flex:1}}
         backdropOpacity={0}
         coverScreen={true}
+        deviceHeight={Dimensions.get('screen').height}
       //  onBackdropPress={()=> this.setState({isVisible=false})}
         
         
@@ -99,7 +100,7 @@ export default function Inventory({ currentInventory, name, creationDate }) {
           </View>
         </View>
       </Modal>
-      </View> */}
+      </View>
     <View style={styles.container}>
     
       
@@ -139,12 +140,12 @@ export default function Inventory({ currentInventory, name, creationDate }) {
         
      </View>
 
-     <Toast></Toast>
+     {/* <Toast></Toast> */}
 
     <TouchableOpacity
       disabled={moreOpened}
       onPress={navigateToCollect}
-      onLongPress={headerToast}
+      onLongPress={showModal}
     >
         <ItemContainer>
             <DescriptionView>
