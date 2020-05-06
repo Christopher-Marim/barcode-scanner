@@ -15,7 +15,7 @@ const DEVICE_WIDTH = Dimensions.get(`window`).width;
 
 
 
-export default function NewHeader(){
+export default function SearchButton(){
     const searchHeaderRef = React.useRef(null);
     return (
         <View style = { styles.container }>
@@ -36,6 +36,7 @@ export default function NewHeader(){
                 enableSuggestion={false}
                 entryAnimation={"from-left-side"}
                 headerHeight={70}
+                
                 onHide={() =>{searchHeaderRef.current.clear();}}
                 
 

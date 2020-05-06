@@ -29,11 +29,13 @@ export default function Routes() {
       <MenuProvider placement="bottom">
       <HomeStack.Navigator
         initialRouteName="Login"
+        
        
       >
       <HomeStack.Screen 
           name="Login"
           component={Login}
+          headerStatusBarHeight={0}
           options={{
             title: '',
             transitionSpec: {
@@ -54,6 +56,7 @@ export default function Routes() {
           component={Home}
          
           options={{
+            headerStatusBarHeight:0,
             headerRight: () => (
              <HeaderButtons></HeaderButtons>
             ),
@@ -69,7 +72,7 @@ export default function Routes() {
             cardStyleInterpolator: forFade,
             headerTitleStyle: {
               fontSize: 20,
-              paddingBottom: 10,
+              paddingBottom: 0,
               fontWeight: 'bold',
               fontFamily: 'serif',
             },
@@ -107,6 +110,7 @@ export default function Routes() {
           name="MySettings"
           component={MySettings}
           options={{
+            headerStatusBarHeight:0,
             title: 'Configurações',
             transitionSpec: {
               open: TransitionSpecs.TransitionIOSSpec,
@@ -123,6 +127,7 @@ export default function Routes() {
           name="Collect"
           component={Collect}
           options={{
+            headerStatusBarHeight:0,
             title: 'Collect',
             transitionSpec: {
               open: TransitionSpecs.TransitionIOSSpec,
