@@ -35,6 +35,7 @@ export default function Home({ navigation }) {
           renderItem={({item}) =>
             <View>
                   <Inventory
+                    itemsQuantity={item.collectedItems.length}
                     currentInventory={item.id}
                     name={item.collectName}
                     creationDate={item.collectDate}

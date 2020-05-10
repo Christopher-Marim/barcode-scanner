@@ -3,7 +3,8 @@ import { createStore } from 'redux';
 
 
 const INITIAL_STATE = {
-  currentInventory: [0],
+  collectTitle:'',
+  currentInventory: 0,
   isPopUpOpened: [false],
   inventories:[
     {
@@ -14,6 +15,24 @@ const INITIAL_STATE = {
         {
           description: 'item collect 1',
           code: '1111',
+          qty: 0,
+          collectedQty: '1',
+        },
+        {
+          description: 'item collect 2',
+          code: '43434',
+          qty: 0,
+          collectedQty: '1',
+        },
+        {
+          description: 'item collect 3',
+          code: '3232',
+          qty: 0,
+          collectedQty: '1',
+        },
+        {
+          description: 'item collect 4',
+          code: '2323',
           qty: 0,
           collectedQty: '1',
         }
@@ -65,55 +84,84 @@ function barcodes(state = INITIAL_STATE, action) {
       
     case 'ADD_BARCODE':
       let x = storedItems.find(x => x.code == action.item)
-      console.log('search return:', x);
-      console.log('action item:', action.item);
       if (x != undefined){
-        
         let auxItem = x;
+        console.log('x2: ', auxItem);
         auxItem = {...auxItem, 'collectedQty':1}
-        return {...state, inventories:[...state.inventories[currentInventory].collectedItems, auxItem]}
+        
+        let auxInventories = [...state.inventories];
+        auxInventories[state.currentInventory].collectedItems.push(auxItem);
+  
+        return {...state, inventories:[...auxInventories]}
       }else{
-
         let auxItem = {
           description: "",
           code: action.item,
           collectedQty: 1,
           qty: 0
+
         }
-        return {...state, inventories:[...state.inventories[currentInventory].collectedItems, auxItem]}
+        let auxInventories = [...state.inventories];
+        auxInventories[state.currentInventory].collectedItems.push(auxItem);
+  
+        return {...state, inventories:[...auxInventories]}
       }
 
     case 'INCREASE_QUANTITY':
-      stateitems.find(x => x.code == action.item).collectedQty++;
-      return { ...state, items: [...state.items] };
+      state.inventories[state.currentInventory].collectedItems.find(x => x.code == action.item).collectedQty++;
+      return { ...state, inventories: [...state.inventories] };
 
     case 'DECREASE_QUANTITY':
-      state.items.find(x => x.code == action.item).collectedQty--;
-      return { ...state, items: [...state.items] };
+      if(state.inventories[state.currentInventory].collectedItems.find(x => x.code == action.item).collectedQty > 0){
+        state.inventories[state.currentInventory].collectedItems.find(x => x.code == action.item).collectedQty--;
+        return { ...state, inventories: [...state.inventories] };
+      }else{
+        console.log('decrease: ',...state.inventories[state.currentInventory].collectedItems);
+        return{...state};
+      }
+
+    case 'REMOVE_COLLECT':
+      let indexCollectToRemove = state.inventories.findIndex(x => x.id == action.inventories[0]);
+      
+      state.inventories.splice(indexCollectToRemove, 1);
+      return { ...state, inventories: [...state.inventories] };
 
     case 'REMOVE_ITEM':
-      const index = state.items.findIndex(x => x.code == action.item);
-      state.items.splice(index, 1);
-      return { ...state, items: [...state.items] };
+     let auxInventories = [...state.inventories];
+     let indexItemToRemove = state.inventories[state.currentInventory].collectedItems.findIndex(x => x.code == action.item);
+     auxInventories[state.currentInventory].collectedItems.splice(indexItemToRemove, 1);     
+     return { ...state, inventories: [...auxInventories]};
 
     case 'SET_QUANTITY':
-      state.items.find(x => x.code == action.item[0]).collectedQty = parseInt(
+      state.inventories[state.currentInventory].collectedItems.find(x => x.code == action.item[0]).collectedQty = parseInt(
         action.item[1]
-      );
-      return { ...state, items: [...state.items] };
+      );      
+      return { ...state, items: [...state.inventories] };
 
     case 'SET_DESCRIPTION':
-      state.items.find(x => x.code == action.item[0]).description =
+      let renameIndex = state.inventories.indexOf(state.inventories.find(collect => collect.id == action.inventories[0]));
+      let collect = state.inventories.find(collect => collect.id == action.inventories[0])
+           
+      if (collect != undefined) {
+        collect = {...collect, 'collectName': action.inventories[1]}
+        let auxInventories = [...state.inventories];
+        auxInventories[renameIndex] = collect;
+
+        return{...state, inventories:[...auxInventories]};
+      }else{
+        return{...state}
+      }
+
+      state.items.find(x => x.code == action.inventories[1]).description =
         action.item[1];
       return { ...state, items: [...state.items] };
     
     case 'NEW_COLLECT':
-      console.log('inventory collect action: ', action.inventory);
-      
       const inventory = {
         id: 3,
         collectName: action.inventory[0],
         collectDate: action.inventory[1],
+        collectedItems: [],
       }
       return {...state, inventories: [...state.inventories, inventory ]}
     case 'SHOWPOPUP':
@@ -121,12 +169,13 @@ function barcodes(state = INITIAL_STATE, action) {
       
       return {...state, isPopUpOpened: [action.value]};
     case 'SET_COLLECTNAME':
-      console.log('collect set');
 
     case 'SET_CURRENT_INVENTORY':
-      console.log('current inventory:', action.idToShow);
-      
-      return {...state, currentInventory: [action.idToShow]}
+      let collectIndex = state.inventories.findIndex(x => x.id == action.idToShow);
+      console.log(`current inventory id: ${action.idToShow} | current index: ${collectIndex}`);
+
+      return {...state, collectTitle: state.inventories[collectIndex].collectName, currentInventory: collectIndex};
+
     default:
       return state;
   }

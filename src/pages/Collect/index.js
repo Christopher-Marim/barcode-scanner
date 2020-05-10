@@ -13,7 +13,8 @@ export default function Collect({ navigation }) {
   function addItemToList(codigo) {
     dispatch({ type: 'ADD_BARCODE', item: newItem });
   }
-  const items = inventories[currentInventory[0] - 1].collectedItems;
+  
+  const items = inventories[currentInventory].collectedItems;
   console.log('Itens Coletados: ', items);
   
   if (items.length > 0) {

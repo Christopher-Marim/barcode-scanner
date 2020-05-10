@@ -2,13 +2,17 @@ import React, { useState } from 'react';
 import { 
    View,
    Text,
-   TouchableHighlight, Dimensions } from 'react-native';
+   TouchableHighlight,
+   TextInput
+   } from 'react-native';
 
 import Modal from 'react-native-modal';
 import { Icon } from 'react-native-elements';
 import { TouchableOpacity  } from 'react-native-gesture-handler';
 import { useNavigation } from '@react-navigation/native';
 import { useDispatch } from 'react-redux';
+import {Overlay} from 'react-native-elements';
+
 
 import {
   Menu,
@@ -25,24 +29,27 @@ import {
   TextCode
 } from './styles';
 
-export default function Inventory({ currentInventory, name, creationDate }) {
+export default function Inventory({ itemsQuantity, currentInventory, name, creationDate}) {
   const dispatch = useDispatch();
   const navigation = useNavigation();
   const [moreOpened, setMoreOpened] = useState(false);
   const [modalOpened, setModalOpened] = useState(false);
-
-  
-
+  const [collectName, setCollectName] = useState("");
   const [inDescription, setInDescription] = useState('');
 
   function removeItem(code) {
     setInputQty(inputQty - 1);
-    dispatch({ type: 'REMOVE_ITEM', inventories: code });
+    dispatch({ type: 'REMOVE_ITEM', inventories:[currentInventory] });
   }
 
-  function handleSetDescription() {
+  function handleRenameCollect() {
     
-    dispatch({ type: 'SET_DESCRIPTION', inventories: [codigo, inDescription] });
+    dispatch({ type: 'SET_DESCRIPTION', inventories: [currentInventory, collectName] }) ;
+  }
+
+  function handleDeleteCollect(){
+
+    dispatch({ type: 'REMOVE_COLLECT', inventories:[currentInventory] });
   }
 
  
@@ -55,43 +62,46 @@ export default function Inventory({ currentInventory, name, creationDate }) {
     setMoreOpened(false);
   }
 
-  
   function showModal(){
     setModalOpened(!modalOpened);
   }
   
   return (<View>
-    <View >
-      <Modal 
-        animationIn='fadeIn'
-        transparent={true}
-        isVisible={modalOpened}
-        style={{margin:0, padding:0, flex:1}}
-        backdropOpacity={0}
-        coverScreen={true}
-        deviceHeight={Dimensions.get('screen').height}
-      //  onBackdropPress={()=> this.setState({isVisible=false})}
-     
-      >
-        <View style={styles.centeredView}>
-          <View style={styles.modalView}>
-            <Text style={styles.modalText}>Servidor:</Text>
-            <View style={styles.buttons}>   
-            <TouchableHighlight
-              style={{ ...styles.openButton, backgroundColor: "#354EB0" }}
-              onPress={() => {
-                setModalOpened(false);
-                
-              }}
-              >
-              <Text style={styles.textStyle}>Cancelar</Text>
-            </TouchableHighlight>
-            </View>
-            
-          </View>
+    <View styles={styles.containerOverlay}>
+    <Overlay height={150}
+          isVisible={modalOpened}
+          onBackdropPress={()=> {setModalOpened(false)}}
+          >
+           <View style={styles.modalView}>
+            <Text style={styles.modalText}>Renomear Coleta</Text>
+              <TextInput
+                style={styles.inputColetaOverlay }
+                placeholder='Nome da Coleta'
+                onChangeText={coleta => setCollectName(coleta)}
+               />
+
+                <View style={styles.buttonsOverlay}>   
+                  <TouchableHighlight
+                    style={{ ...styles.openButton,  }}
+                    onPress={()=>{setModalOpened(false)}}
+                    >
+                      <Text style={styles.textStyleOverlay}>Cancelar</Text>
+                  </TouchableHighlight>
+                      
+                  <TouchableHighlight
+                    style={{ ...styles.openButton, marginLeft:20 }}
+                    onPress={() => {
+                      handleRenameCollect();
+                      
+                    }}
+                    onPressOut={()=>{setModalOpened(false)}}
+                    >
+                    <Text style={styles.textStyleOverlay}>Renomear</Text>
+                  </TouchableHighlight>
+                </View>
+             </View>
+        </Overlay>
         </View>
-      </Modal>
-      </View>
     <View style={styles.container}>
     
       
@@ -110,7 +120,7 @@ export default function Inventory({ currentInventory, name, creationDate }) {
           <MenuOptions >
             <TouchableOpacity 
             style={styles.actionMenu}
-            onPress={() => {setMoreOpened(!moreOpened)}}
+            onPress={() => {setMoreOpened(!moreOpened), setModalOpened(true)}}
             >
               <Text style={styles.actionTextMenu}>
                     Renomear
@@ -118,7 +128,7 @@ export default function Inventory({ currentInventory, name, creationDate }) {
             </TouchableOpacity>
 
             <TouchableOpacity style={styles.actionMenu} 
-            onPress={() => {setMoreOpened(!moreOpened)}}
+            onPress={() => {setMoreOpened(!moreOpened), handleDeleteCollect()}}
             >
               <Text style={styles.actionTextMenu}>
                  Excluir
@@ -141,7 +151,7 @@ export default function Inventory({ currentInventory, name, creationDate }) {
               <TextDescription>{name}</TextDescription>
               <View style={styles.positionTextList}>
               <TextCode>Data: {creationDate}</TextCode>
-              <Text style={styles.textColetas} >Coletas: X</Text>
+              <Text style={styles.textColetas} >Coletas: {itemsQuantity}</Text>
               </View>
             </DescriptionView>
             

@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import { Text, View, StyleSheet } from 'react-native';
+import React, {useState, useEffect} from 'react';
+import { View } from 'react-native';
 import { Icon } from 'react-native-elements';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch  } from 'react-redux';
 import {
   ItemContainer,
   TextDescription,
@@ -17,37 +17,25 @@ import {
 export default function Item({ description, codigo, quantidade }) {
   const dispatch = useDispatch();
   const [inputQty, setInputQty] = useState(quantidade);
-  const [inDescription, setInDescription] = useState('');
-  const items = useSelector(state => state.items);
-  // var strQty = ;
   useEffect(() => {
-    // Atualiza o titulo do documento usando a API do browser
     setInputQty(quantidade);
-  }, [quantidade]);
+  },[quantidade]);
 
   function increaseQty(code) {
-    setInputQty(inputQty + 1);
     dispatch({ type: 'INCREASE_QUANTITY', item: code });
   }
 
   function decreaseQty(code) {
-    setInputQty(inputQty - 1);
     dispatch({ type: 'DECREASE_QUANTITY', item: code });
   }
 
   function removeItem(code) {
-    setInputQty(inputQty - 1);
     dispatch({ type: 'REMOVE_ITEM', item: code });
   }
-
+ 
   function handleSetQty() {
     dispatch({ type: 'SET_QUANTITY', item: [codigo, inputQty] });
   }
-
-  function handleSetDescription() {
-    dispatch({ type: 'SET_DESCRIPTION', item: [codigo, inDescription] });
-  }
-
   return (
     <ItemContainer>
       <DescriptionView>
@@ -67,7 +55,7 @@ export default function Item({ description, codigo, quantidade }) {
           onChangeText={text => setInputQty(text)}
           onBlur={handleSetQty}
           value={inputQty.toString()}
-          keyboardType={'numeric'}
+          keyboardType={'decimal-pad'}
         />
         <View style={{ paddingRight: 230 }}>
           <AddButton onPress={() => increaseQty(codigo)}>

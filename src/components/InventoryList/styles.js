@@ -12,11 +12,9 @@ flex:1;
   margin-bottom: 5px;
   padding-top:10px;
   background-color: white;
-  border-top-left-radius:10;
-  border-bottom-left-radius:10;
+  border-top-left-radius:10px;
+  border-bottom-left-radius:10px;
  
-  
-  
 `;
 
 export const DescriptionView = styled.View`
@@ -103,74 +101,55 @@ export default StyleSheet.create({
     fontWeight:'500',
 
   },
-  // Modal
-  centeredView: {
+  
+ 
+  containerOverlay: {
     flex: 1,
-    justifyContent: "flex-start",
-    alignItems: "center",
-    marginTop: 0,
-    marginBottom:710,
-    backgroundColor:'green'
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  buttonsOverlay:{
+    justifyContent:"flex-end",
+    flexDirection:'row',
+    
+  },
+  openButtonOverlay: {  
+    borderRadius: 10,
+    padding: 8,
+    paddingHorizontal:20,
   },
   modalView: {
-    margin: 0,
-   
+    margin: 10,
     backgroundColor: "white",
-    borderRadius: 0,
-    padding: 8,
-    width:'100%',
+    padding: 0,
+    width:'94.5%',
     alignItems: "stretch",
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 2
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
-    elevation: 5
   },
-  modalText: {
-    marginBottom: 15,
-    textAlign: "left",
-    fontSize:15,
-    
-  },
-  containerModal:{
-    
-    alignItems:"center", 
-    justifyContent:'flex-start',
-    marginBottom:750
   
+  textStyleOverlay: {
+    
+    color: "#2196F3",
+    fontWeight: "bold",
+    textAlign: "left"
+  },
+  modalTextOverlay: {
+    marginBottom: 30,
+    textAlign: "center",
+    fontSize:20,
+    fontWeight:"bold"
     
   },
-  //Toast
+  inputColetaOverlay:{
+    height: 40, 
+    backgroundColor: '#fff',
+    borderRadius:10,
+    marginBottom:20,
+    paddingLeft:10,
+    fontWeight:'500',
+    borderBottomWidth:3,
+    borderBottomColor:'#D3D4D8'
 
-  root: {
-    flex: 1,
-    flexDirection: 'column-reverse',
   },
-  toast: {
-    elevation: 2,
-    flexDirection: 'row',
-    height: 40,
-    margin: 16,
-    borderRadius: 20,
-    backgroundColor:"blue",
-    alignItems: 'center',
-    justifyContent: 'space-between'
-  },
-  textToast: {
-    color: 'white',
-    fontSize: 16,
-    marginLeft: 16
-  },
-  buttonToast: {
-    marginRight: 16
-  },
-  buttonTextToast: {
-    color: 'white',
-    fontSize: 16,
-    fontWeight: 'bold'
-  }
 
 })

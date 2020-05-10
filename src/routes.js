@@ -3,7 +3,8 @@ import * as React from 'react';
 import { createStackNavigator, TransitionSpecs } from '@react-navigation/stack';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { MenuProvider } from 'react-native-popup-menu'
+import { MenuProvider } from 'react-native-popup-menu';
+import {useSelector} from 'react-redux';
 
 const HomeStack = createStackNavigator();
 
@@ -22,6 +23,8 @@ const forFade = ({ current, closing }) => ({
 });
 
 export default function Routes() {
+  const collectTitle = useSelector(state => state.collectTitle);
+
   return (
     <SafeAreaView
       style={{ flex: 1, justifyContent: 'space-between', alignItens: 'center' }}
@@ -58,7 +61,7 @@ export default function Routes() {
           options={{
             headerStatusBarHeight:0,
             headerRight: () => (
-             <HeaderButtons></HeaderButtons>
+             <HeaderButtons/>
             ),
             headerLeft: () => (
               <SearchButton />
@@ -128,7 +131,7 @@ export default function Routes() {
           component={Collect}
           options={{
             headerStatusBarHeight:0,
-            title: 'Collect',
+            title: collectTitle,
             transitionSpec: {
               open: TransitionSpecs.TransitionIOSSpec,
               close: TransitionSpecs.TransitionIOSSpec,
