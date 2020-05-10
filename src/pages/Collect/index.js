@@ -24,11 +24,13 @@ export default function Collect({ navigation }) {
           contentContainerStyle={styles.list}
           data={items}
           renderItem={({ item }) => (
+
             <Item
               description={item.description}
               codigo={item.code}
               quantidade={item.collectedQty}
             />
+            
           )}
           keyExtractor={item => item.code}
         />

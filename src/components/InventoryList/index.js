@@ -1,9 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { 
-  View,
-   TouchableWithoutFeedback, 
-   Text, 
-   Alert,
+   View,
+   Text,
    TouchableHighlight, Dimensions } from 'react-native';
 
 import Modal from 'react-native-modal';
@@ -11,10 +9,8 @@ import { Icon } from 'react-native-elements';
 import { TouchableOpacity  } from 'react-native-gesture-handler';
 import { useNavigation } from '@react-navigation/native';
 import { useDispatch } from 'react-redux';
-// import Toast from '../Toast'
 
 import {
-  MenuProvider,
   Menu,
   MenuOptions,
   MenuTrigger,
@@ -26,7 +22,6 @@ import {
   DescriptionView,
   ItemContainer,
   TextDescription,
-  TrashButton,
   TextCode
 } from './styles';
 
@@ -76,11 +71,7 @@ export default function Inventory({ currentInventory, name, creationDate }) {
         coverScreen={true}
         deviceHeight={Dimensions.get('screen').height}
       //  onBackdropPress={()=> this.setState({isVisible=false})}
-        
-        
-        
-        
-        
+     
       >
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
@@ -139,8 +130,6 @@ export default function Inventory({ currentInventory, name, creationDate }) {
         </Menu>
         
      </View>
-
-     {/* <Toast></Toast> */}
 
     <TouchableOpacity
       disabled={moreOpened}
