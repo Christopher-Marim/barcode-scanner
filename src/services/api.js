@@ -1,7 +1,8 @@
 import axios from 'axios';
+import { getSupportedVideoFormats } from 'expo/build/AR';
 
 const api = axios.create({
-  baseURL: 'https://ptsv2.com/t/5rmp1-1584408896/post',
+  baseURL: '',
 });
 
 export default api;

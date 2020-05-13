@@ -37,10 +37,10 @@ useEffect(()=> {
     <KeyboardAvoidingView style={styles.background}>
       <View style={styles.containerLogo}>
         <Image style={{ 
-          width: 150,
-          height: 150,
+          width: 170,
+          height: 170,
         }}
-        source={require('../../../assets/logo.png')} 
+        source={require('../../../assets/icon.png')} 
         />
       </View>
     <Animated.View 

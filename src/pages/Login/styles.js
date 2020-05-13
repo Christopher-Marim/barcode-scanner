@@ -10,6 +10,7 @@ export default  StyleSheet.create({
       containerLogo:{
         flex:1,
         justifyContent:'center',
+        
       },
       container:{
         flex:1,

@@ -6,6 +6,7 @@ const INITIAL_STATE = {
   collectTitle:'',
   currentInventory: 0,
   isPopUpOpened: [false],
+  server: 'https://ptsv2.com/t/5rmp1-1584408896/post',
   inventories:[
     {
       id: 1,

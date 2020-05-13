@@ -23,8 +23,8 @@ export default function HeaderButtons() {
 
   const [moreOpened, setMoreOpened] = useState(false);
   const navigation = useNavigation();
-  const items = useSelector(state => state.items);
-
+  const items = useSelector(state => state.inventories);
+  const server = useSelector(state => state.server);
   twoOptionAlertHandler = () =>{
     Alert.alert(
       'Enviar ao servidor',
@@ -39,7 +39,7 @@ export default function HeaderButtons() {
 
   async function pushToServer() {
     
-    const response = await api.post('', items);
+    const response = await api.post(server, items);
     if(response.status == 200){
       ToastAndroid.show('Coleta Enviada', ToastAndroid.SHORT);
     }else{

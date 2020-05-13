@@ -15,7 +15,7 @@ const DEVICE_WIDTH = Dimensions.get(`window`).width;
 
 
 
-export default function SearchButton(){
+ const SearchButton = () => {
     const searchHeaderRef = React.useRef(null);
     return (
         <View style = { styles.container }>
@@ -39,6 +39,7 @@ export default function SearchButton(){
                 
                 onHide={() =>{searchHeaderRef.current.clear();}}
                 
+                
 
                 onClear = {() => {
                     console.log(`Clearing input!`);
@@ -59,3 +60,4 @@ export default function SearchButton(){
     );
 }
 
+export default SearchButton
