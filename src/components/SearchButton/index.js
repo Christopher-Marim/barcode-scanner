@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
     Dimensions,
     AppRegistry,
@@ -10,13 +10,21 @@ import {
 import {Icon, Button} from 'react-native-elements';
 import SearchHeader from 'react-native-search-header';
 import styles from './styles';
+import { useSelector, useDispatch } from 'react-redux';
+
+import { State } from 'react-native-gesture-handler';
 
 const DEVICE_WIDTH = Dimensions.get(`window`).width;
 
-
-
- const SearchButton = () => {
+ const SearchButton = ({currentInventory}) => {
+    dispatch = useDispatch();
+    const [collectName, setCollectName] = useState("");
     const searchHeaderRef = React.useRef(null);
+
+    function filterSearch(){
+        dispatch({ type: 'FILTER_SEARCH', inventories: [currentInventory, collectName.toLowerCase()] }) ;
+    }
+
     return (
         <View style = { styles.container }>
             <View style = { styles.header }>
@@ -38,12 +46,14 @@ const DEVICE_WIDTH = Dimensions.get(`window`).width;
                 headerHeight={70}
                 
                 onHide={() =>{searchHeaderRef.current.clear();}}
+                onSearch={filterSearch()}
                 
                 
 
                 onClear = {() => {
                     console.log(`Clearing input!`);
                 }}
+                onChangeText={(text) => {setCollectName(text)}}
                 onGetAutocompletions = {async (text) => {
                     if (text) {
                         const response = await fetch(`http://suggestqueries.google.com/complete/search?client=firefox&q=${text}`, {
@@ -60,4 +70,4 @@ const DEVICE_WIDTH = Dimensions.get(`window`).width;
     );
 }
 
-export default SearchButton
+export default SearchButton;

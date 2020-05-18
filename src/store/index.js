@@ -7,6 +7,10 @@ const INITIAL_STATE = {
   currentInventory: 0,
   isPopUpOpened: [false],
   server: 'https://ptsv2.com/t/5rmp1-1584408896/post',
+  searchInventories:[
+    
+  ],
+  textInput : [],
   inventories:[
     {
       id: 1,
@@ -177,6 +181,14 @@ function barcodes(state = INITIAL_STATE, action) {
 
       return {...state, collectTitle: state.inventories[collectIndex].collectName, currentInventory: collectIndex};
 
+      case 'FILTER_SEARCH':
+        let filter = state.inventories.filter(x=> x.collectName.toLowerCase().indexOf(action.inventories[1]) > -1);
+        console.log("filter: ", filter);
+
+      // case 'ADD_TEXTINPUT':
+      //   let textInput = state.textInput;
+      //   textInput.push(<TextInput key={action.textInput} />);
+      //   setState({ textInput })  
     default:
       return state;
   }
