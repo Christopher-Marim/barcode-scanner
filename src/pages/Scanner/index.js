@@ -9,12 +9,6 @@ export default function App({ navigation }) {
   const [hasPermission, setHasPermission] = useState(null);
   const [scanned, setScanned] = useState(false);
 
-  const newItem = {
-    description: '',
-    code: '',
-    qty: 1,
-  };
-
   useEffect(() => {
     (async () => {
       const { status } = await BarCodeScanner.requestPermissionsAsync();
@@ -26,7 +20,7 @@ export default function App({ navigation }) {
     setScanned(true);
     console.log('scanned', data);
 
-    newItem.code = data;
+    const newItem = data;
 
     dispatch({ type: 'ADD_BARCODE', item: newItem });
 

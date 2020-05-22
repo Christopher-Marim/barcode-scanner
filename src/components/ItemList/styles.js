@@ -2,7 +2,7 @@ import styled from 'styled-components/native';
 import { RectButton } from 'react-native-gesture-handler';
 
 export const ItemContainer = styled.View`
-  height: 100px;
+  height: 180px;
   flex-direction: column;
   align-items: flex-start;
   border-left-width: 2px;
@@ -18,9 +18,10 @@ export const DescriptionView = styled.View`
 
 export const QuantityView = styled.View`
   flex-direction: row;
+  margin-top:20px
 `;
 
-export const InputDescription = styled.TextInput`
+export const TextDescription = styled.Text`
   font-size: 20px;
 `;
 
